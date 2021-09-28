@@ -18,21 +18,22 @@ graffiti_csv = graffiti_csv.groupby('Geo Local Area')['COUNT'].sum()
 
 #Merging two datasets (Graffiti and Lighting)
 df = pd.merge(graffiti_csv, lighting_csv, on='Geo Local Area')
-
-#Trying using seaborn
-#fig, scatter = plt.subplots(figsize = (10,6), dpi = 100)
-#scatter = sb.scatterplot(x='COUNT', y= 'NODE_NUMBER', data = df, hue='Geo Local Area', legend = True)
+fig, scatter = plt.subplots(figsize = (10,6), dpi = 100)
+#scatter = sb.scatterplot(x='NODE_NUMBER', y= 'COUNT', data = df, hue='Geo Local Area', legend = True)
+scatter = sb.regplot(x='NODE_NUMBER', y = 'COUNT',  data = df, fit_reg=True)
+#scatter = sb.lmplot(x='NODE_NUMBER', y = 'COUNT',  data = df)
+scatter.set(xlabel='Total Lighting', ylabel='Amount of Graffiti')
 '''scatter.legend(fontsize = 6, \
                bbox_to_anchor= (1.03, 1), \
              #  title="Graffity", \
              #  title_fontsize = 18, \
                shadow = True, \
-               facecolor = 'white')
-'''
+               facecolor = 'white')'''
+
 
 #Trying using Pyplot, using gaussian_kde to estimate the probability density function (PDF) of a random variable in a non-parametric way
-xy = np.vstack([df['COUNT'], df['NODE_NUMBER']])
-z = gaussian_kde(xy)(xy)
-fig, ax = plt.subplots()
-ax.scatter(df['COUNT'], df['NODE_NUMBER'], c=z, s=100)
+#xy = np.vstack([df['NODE_NUMBER'], df['COUNT']])
+#z = gaussian_kde(xy)(xy)
+#fig, ax = plt.subplots()
+#ax.scatter(df['NODE_NUMBER'], df['COUNT'], c=z, s=100)
 plt.show()
