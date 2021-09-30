@@ -11,28 +11,30 @@ def conv_to_point(val):
 
 
 # find nearest coordinate
-def find_nearest(row: pd.Series, df_non_na: pd.DataFrame) -> str:
+def find_nearest(row: pd.Series, dict_non_na: dict) -> str:
     if not pd.isnull(row['Geo Local Area']):
         return row['Geo Local Area']
     return min(
-        df_non_na['Geom'],
-        key=lambda lat_lon: geodesic(lat_lon, row['Geom'])
-    )
+        dict_non_na,
+        key=lambda r: geodesic(r['Geom'], row['Geom'])
+    )['Geo Local Area']
 
 
 def chunk_find_nearest(
     index: int,
     df: pd.DataFrame,
-    df_non_na: pd.DataFrame,
+    dict_non_na: dict,
 ) -> None:
+    # This does the same as the lines below, but without logging
     # df['Geo Local Area'] = [
     #     find_nearest(row[1], df_non_na) for row in df.iterrows()
     # ]
     result = []
-    for i, row in enumerate(df.iterrows()):
+    dictionary = df.to_dict('records')
+    for i, row in enumerate(dictionary):
         if i % 10 == 0:
-            print(f'{index}: {i + 1}/{len(df)}')
-        result.append(find_nearest(row[1], df_non_na))
+            print(f'{index}: {i + 1}/{len(df)}', flush=True)
+        result.append(find_nearest(row, dict_non_na))
     df['Geo Local Area'] = result
     df.to_csv(f'resources/data/temp_{index}.csv', index=False)
 
@@ -78,7 +80,7 @@ if __name__ == '__main__':
 
     # fix missing values in Local Area - multi threaded
     # setup multiprocessing parameters
-    jobs = 8
+    jobs = 12
     processes = []
     df_non_na = df[['Geom', 'Geo Local Area']].dropna()
     # shuffle to get (almost) equal workload
@@ -89,7 +91,7 @@ if __name__ == '__main__':
         chunk = df.iloc[round(j * chunk_size): round((j + 1) * chunk_size)]
         process = multiprocessing.Process(
             target=chunk_find_nearest,
-            args=[j, chunk, df_non_na],
+            args=[j, chunk, df_non_na.to_dict('records')],
         )
         process.start()
         processes.append(process)
