@@ -3,7 +3,17 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 
 # Read CSV
-df = pd.read_csv('resources/data/graffiti_combined.csv')
+df = pd.read_csv(
+    'resources/data/graffiti_combined.csv',
+    dtype={
+        'Geo Local Area': str,
+        'Count': int,
+        'SITE_ID': str,
+        'Latitude': float,
+        'Longitude': float,
+        'Type': str,
+    }
+)
 
 # Drop unecessary columns
 df = df[['Type', 'Geo Local Area', 'Count']]
@@ -28,3 +38,4 @@ fig, scatter = plt.subplots(figsize=(10, 6), dpi=100)
 scatter \
     = sns.regplot(x='Light Sources', y='Graffiti Count', data=df, fit_reg=True)
 plt.show()
+fig.savefig('resources/images/graffiti_vs_light_sources.png')
