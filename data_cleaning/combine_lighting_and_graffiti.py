@@ -3,6 +3,14 @@ import json
 from geopy.distance import geodesic
 import multiprocessing
 from pathlib import Path
+import argparse
+
+
+argparser = argparse.ArgumentParser(conflict_handler='resolve')
+argparser.add_argument(
+    "-j", "--jobs", required=False, default=6, type=int
+)
+jobs = vars(argparser.parse_known_args()[0])['jobs']
 
 
 def conv_to_point(val):
@@ -80,7 +88,6 @@ if __name__ == '__main__':
 
     # fix missing values in Local Area - multi threaded
     # setup multiprocessing parameters
-    jobs = 12
     processes = []
     df_non_na = df[['Geom', 'Geo Local Area']].dropna()
     # shuffle to get (almost) equal workload
