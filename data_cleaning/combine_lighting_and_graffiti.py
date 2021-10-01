@@ -1,3 +1,9 @@
+"""
+Read graffiti, street-lighting-poles and property-addresses csvs
+and combine them. Fill in missing Geo Local Area to be the closest location
+available based on other object's Area. Save them to 'graffiti-combined.csv'
+"""
+
 import pandas as pd
 import json
 from geopy.distance import geodesic

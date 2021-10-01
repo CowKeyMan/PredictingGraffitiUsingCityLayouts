@@ -1,3 +1,8 @@
+"""
+Draw a scatter plot and line of best fit of the number
+of graffiti against the number of light sources.
+"""
+
 import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
