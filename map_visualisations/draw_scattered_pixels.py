@@ -1,12 +1,17 @@
 import pandas as pd
 import cv2
 from utilities import coordinate_to_image_space
+import seaborn as sns
 
+colours = [
+    tuple([(x * 255) for x in colour])
+    for colour in sns.color_palette("colorblind", 10)
+]
 
 type_to_color = {
     'G': (255, 0, 0),
-    'B': (0, 255, 0),
-    'L': (0, 0, 255),
+    'B': colours[2],
+    'L': colours[9],
 }
 type_to_size = {
     'G': 1,
@@ -42,6 +47,7 @@ for i, row in enumerate(df.to_dict('records')):
     if i % 1000 == 0:
         print(f'{i + 1} / {len(df)}')
 
+vancouver_image = cv2.cvtColor(vancouver_image, cv2.COLOR_BGR2RGB)
 cv2.namedWindow('V', cv2.WINDOW_NORMAL)
 cv2.imshow('V', vancouver_image)
 cv2.waitKey(0)
