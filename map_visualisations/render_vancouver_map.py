@@ -4,6 +4,8 @@ data, to an image called 'vancouver.jpg'
 
 Run with the -w/--width parameter in order to change the size of the
 returned image
+
+Run with -b/--buildings to also draw the buildings
 """
 
 import geopandas as gpd
@@ -11,10 +13,13 @@ from matplotlib import pyplot as plt
 from shapely.geometry import shape
 import json
 import argparse
+import seaborn as sns
 
-edge_colour = (0.5, 0.5, 0.5)
-vancouver_colour = (0, 0, 0)
-buildings_colour = (0.7, 0.7, 0.7)
+colours = sns.color_palette("gray", 10)
+
+vancouver_colour = colours[4]
+edge_colour = colours[5]
+buildings_colour = colours[7]
 
 argparser = argparse.ArgumentParser(conflict_handler='resolve')
 argparser.add_argument(
@@ -35,7 +40,7 @@ ax.axis('off')
 vancouver.plot(
     ax=ax,
     edgecolor=edge_colour,
-    facecolor=(0, 0, 0),
+    facecolor=vancouver_colour,
     antialiased=False,
 )
 if args['buildings']:
