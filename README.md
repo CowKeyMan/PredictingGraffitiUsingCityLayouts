@@ -1,2 +1,7 @@
-Step 1: run python/data\_cleaning/wrang.py
-Step 2: run python area.py (getting the area m2 from the local boundary)
+Data for graffiti, street light poles, buildings and local area geolocation was downloaded on Monday 13th
+
+Steps:
+
+1. Run python data\_cleaning/combine\_lighting\_and\_graffiti.py
+1. Run python data\_cleaning/calculate\_geolocal\_area\_meters\_squared.py (getting the area in m2 from the local boundary)
+1. Run python data\_cleaning/calculate\_buildinds\_area\_meters\_squared.py (getting the area in m2 from the buildings)
