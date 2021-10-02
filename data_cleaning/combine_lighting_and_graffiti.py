@@ -6,7 +6,7 @@ available based on other object's Area. Save them to 'graffiti-combined.csv'
 
 import pandas as pd
 import json
-from geopy.distance import geodesic
+# from geopy.distance import geodesic
 import multiprocessing
 from pathlib import Path
 import argparse
@@ -30,7 +30,11 @@ def find_nearest(row: pd.Series, dict_non_na: dict) -> str:
         return row['Geo Local Area']
     return min(
         dict_non_na,
-        key=lambda r: geodesic(r['Geom'], row['Geom'])
+        # key=lambda r: geodesic(r['Geom'], row['Geom'])
+        key=lambda r: (
+            (r['Latitude'] - row['Latitude']) ** 2
+            + (r['Longitude'] - row['Longitude']) ** 2
+        )
     )['Geo Local Area']
 
 
@@ -46,7 +50,7 @@ def chunk_find_nearest(
     result = []
     dictionary = df.to_dict('records')
     for i, row in enumerate(dictionary):
-        if i % 10 == 0:
+        if i % 1000 == 0:
             print(f'{index}: {i + 1}/{len(df)}', flush=True)
         result.append(find_nearest(row, dict_non_na))
     df['Geo Local Area'] = result
@@ -95,7 +99,8 @@ if __name__ == '__main__':
     # fix missing values in Local Area - multi threaded
     # setup multiprocessing parameters
     processes = []
-    df_non_na = df[['Geom', 'Geo Local Area']].dropna()
+    df_non_na \
+        = df[['Geom', 'Geo Local Area', 'Longitude', 'Latitude']].dropna()
     # shuffle to get (almost) equal workload
     df = df.sample(frac=1, ignore_index=True)
     # split dataframes into chunks and process them individually
