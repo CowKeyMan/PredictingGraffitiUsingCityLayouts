@@ -18,7 +18,8 @@ df = pd.read_csv(
 df['area_m2'] \
     = df.apply(lambda row: round(area(json.loads(row['Geom'])), 2), axis=1)
 df['geometry'] = df['Geom']
-df = df[['SITE_ID', 'area_m2', 'geometry']]
+df['street'] = df['STREETNAME']
+df = df[['SITE_ID', 'area_m2', 'geometry', 'street']]
 df['SITE_ID'] = df['SITE_ID'].astype(str)
 
 df_combined = pd.read_csv(
