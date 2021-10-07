@@ -14,7 +14,7 @@ type_to_color = {
     'L': colours[9],
 }
 type_to_size = {
-    'G': 1,
+    'G': 10,
     'B': 2,
     'L': 2,
 }
