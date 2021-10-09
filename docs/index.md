@@ -6,7 +6,7 @@ This project will analyse correlation between graffiti and street lighting in Va
 
 ### Why does the government need this?
 
-In July 2021, Vancouver city spend half a million dollars on graffiti removal [Link](https://dailyhive.com/vancouver/vancouver-graffiti-removal-half-a-million). That is mainly because there's a spike in nuissance graffiti during Covid-19 pandemic [Link](https://globalnews.ca/news/8240692/vancouver-spike-nuisance-graffiti-calls-311-covid-19-pandemic/). 
+In July 2021, Vancouver city spend half a million dollars on graffiti removal [Link](https://dailyhive.com/vancouver/vancouver-graffiti-removal-half-a-million). It is said that there is an increasing phone call to 311 about 87%. One of the reason is because there's a spike in nuissance graffiti during Covid-19 pandemic [Link](https://globalnews.ca/news/8240692/vancouver-spike-nuisance-graffiti-calls-311-covid-19-pandemic/). The presence of graffiti in an area over a long period of time encourages the appearance of other graffiti. Besides that, graffiti leads to the racist attack too in Vancouver [Link](https://www.vancouverisawesome.com/local-news/mural-in-vancouvers-chinatown-targeted-in-racist-attack-3932501).
 
 ### What is our goal?
 
@@ -19,5 +19,8 @@ The Open Data Portal of the city of Vancouver will be used in this project. [Lin
 ### Who can use this?
 
 While the studied location of this project is Vancouver, this work will be publicly available. Hence, other officials from all over the globe may also view it. Therefore, it may prompt a new way of dealing with graffiti before it occurs.
+
+
+### How is the result?
 
 
