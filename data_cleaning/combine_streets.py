@@ -17,10 +17,9 @@ b_area = b_area[['Geo Local Area', 'area_m2']]
 #load street data and convert street blocks to whole streets 
 #if street with multiply types take mode
 sf = pd.read_csv('resources/data/public-streets.csv', sep=';')
-sf['HBLOCK'] = sf['HBLOCK'].map(split_streetnames)
-sf['street'] = sf['HBLOCK']
+sf['street'] = sf['HBLOCK'].map(split_streetnames)
 sf['street_type'] = sf['STREETUSE']
-sf = sf[['street', 'street_type']].drop_duplicates().sort_values('street')
+sf = sf[['street', 'street_type']]
 sf = sf.groupby(['street'], as_index=False).agg(lambda x: pd.Series.mode(x)[0])
 
 # population density and area of local areas
@@ -32,9 +31,13 @@ pf['building_ratio'] = pf['area_m2_y'] / pf['area_m2_x']
 pf['area_m2'] = pf['area_m2_x']
 pf = pf[['Geo Local Area', 'area_m2', 'pop_density', 'building_ratio']]
 
+
 #merge dataframes
 df_combined = bf.merge(sf, 'left', on='street')
 df_combined = df_combined.merge(pf, 'left', on='Geo Local Area')
+
+
+print(df_combined)
 
 #Write to CSV
 df_combined.to_csv('resources/data/combined_streets.csv', index=False)

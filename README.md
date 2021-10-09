@@ -1,5 +1,3 @@
-Data for graffiti, street light poles, buildings and local area geolocation was downloaded on Monday 13th
-
 Steps:
 
 1. Run python data\_cleaning/combine\_lighting\_and\_graffiti.py
