@@ -6,7 +6,7 @@ This project will analyse correlation between graffiti and street lighting in Va
 
 ### Why does the government need this?
 
-In July 2021, Vancouver city spend half a million dollars on graffiti removal [Link](https://dailyhive.com/vancouver/vancouver-graffiti-removal-half-a-million). It is said that there is an increasing phone call to 311 about 87%. One of the reason is because there's a spike in nuissance graffiti during Covid-19 pandemic [Link](https://globalnews.ca/news/8240692/vancouver-spike-nuisance-graffiti-calls-311-covid-19-pandemic/). The presence of graffiti in an area over a long period of time encourages the appearance of other graffiti. Besides that, graffiti leads to the racist attack too in Vancouver [Link](https://www.vancouverisawesome.com/local-news/mural-in-vancouvers-chinatown-targeted-in-racist-attack-3932501).
+In July 2021, Vancouver city spend half a million dollars on graffiti removal [Link](https://dailyhive.com/vancouver/vancouver-graffiti-removal-half-a-million). It is said that there is an increasing phone call to 311 about 87%. One of the reason is because there's a spike in nuissance graffiti during Covid-19 pandemic [Link](https://globalnews.ca/news/8240692/vancouver-spike-nuisance-graffiti-calls-311-covid-19-pandemic/). The presence of graffiti in an area over a long period of time encourages the appearance of other graffiti. Besides that, graffiti leads to the racist attack too [Link](https://www.vancouverisawesome.com/local-news/mural-in-vancouvers-chinatown-targeted-in-racist-attack-3932501).
 
 ### What is our goal?
 
@@ -22,5 +22,9 @@ While the studied location of this project is Vancouver, this work will be publi
 
 
 ### How is the result?
+
+'''
+- The method and the result is going to be in here.
+'''
 
 
