@@ -23,8 +23,9 @@ While the studied location of this project is Vancouver, this work will be publi
 
 ### How is the result?
 
-'''
 - The method and the result is going to be in here.
-'''
+
+<img width="439" alt="Screen Shot 2021-10-10 at 8 08 46 PM" src="https://user-images.githubusercontent.com/4567991/136697170-44657546-e939-42f1-b24a-4b53177a7324.png">
+
 
 
