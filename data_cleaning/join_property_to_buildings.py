@@ -1,105 +1,112 @@
-import pandas as pd
-import multiprocessing
-from pathlib import Path
-import argparse
-import json
-from shapely.ops import unary_union
-from shapely.geometry import shape, MultiPolygon
-from area import area
+"""
+The properties contain the addresses of the buildings, hence they are joined
+To do this, the coordinate of the properties are taken and intersected over
+each building. If the property coordinate intersects with the building
+polygon, then we merge them
+"""
 
-filename = Path(__file__).stem
+import pandas as pd
+import json
+from shapely.geometry import shape
+from shapely.geometry import mapping as shapely_to_dict
+import multiprocessing
+import argparse
+from pathlib import Path
+from shapely.errors import ShapelyDeprecationWarning
+import warnings
+warnings.filterwarnings("ignore", category=ShapelyDeprecationWarning)
 
 argparser = argparse.ArgumentParser(conflict_handler='resolve')
 argparser.add_argument(
-    "-j", "--jobs", required=False, default=6, type=int
+    "-j", "--jobs", required=False, default=12, type=int
 )
-argparser.add_argument(
-    "-n", "--no_cache", required=False, action='store_true'
-)
-args = vars(argparser.parse_known_args()[0])
-jobs = args['jobs']
-cache = not args['no_cache']
+jobs = vars(argparser.parse_known_args()[0])['jobs']
 
-
-def conv_to_point(val):
-    lon, lat = json.loads(val)['coordinates']
-    return lat, lon
-
-
-# load and filter
+# load and filter property
 df_property = pd.read_csv(
     'resources/data/original/property-addresses.csv', delimiter=';'
 )
-df_property['Geom'] = df_property['Geom'].map(conv_to_point)
-df_property['latitude'] = [x[0] for x in df_property['Geom']]
-df_property['longitude'] = [x[1] for x in df_property['Geom']]
 df_property.rename(
     columns={
         'Geo Local Area': 'geo_local_area',
         'STD_STREET': 'street',
-        'Geom': 'geometry',
+        'Geom': 'property_coordinate',
     },
     inplace=True
 )
-df_property = df_property[['geo_local_area', 'street', 'geometry']]
+df_property = df_property[['geo_local_area', 'street', 'property_coordinate']]
+df_property = df_property.dropna().reset_index(drop=True)
+df_property['property_coordinate'] = [
+    shape(json.loads(x)) for x in df_property['property_coordinate']
+]
 
-if Path(f'resources/data/cache/{filename}_1.csv').exists() and cache:
-    df_building = pd.read_csv(f'resources/data/cache/{filename}_1.csv')
-    df_building['geometry'] = [
-        shape(x) for x in df_building['geometry']
-    ]
-else:
-    df_building = pd.read_csv(
-        'resources/data/original/building-footprints-2009.csv', delimiter=';'
-        )
-    df_building = df_building[[
-        'BLDGID',
-        'ROOFTYPE',
-        'TOPELEV_M',
-        'Geom'
-    ]]
+# load buildings
+df_building = pd.read_csv('resources/data/generated/filter_buildings.csv')
+df_building['building_polygon'] = [
+    shape(json.loads(x)) for x in df_building['building_polygon']
+]
 
-    df_building.rename(
-        columns={
-            'BLDGID': 'building_id',
-            'ROOFTYPE': 'roof_type',
-            'TOPELEV_M': 'highest_elevation_m',
-            'Geom': 'geometry'
-        },
-        inplace=True
+
+def chunk_process(index, properties, buildings):
+    result = []
+    length = len(buildings)
+    for i, building in enumerate(buildings):
+        if i % 100 == 0:
+            print(f'{index}: {i+1}/{length}')
+        poly = building['building_polygon']
+        for prop in properties:
+            if not prop['property_coordinate'] \
+                    .intersects(poly):
+                continue
+            entry = building | prop
+            entry['property_coordinate'] = json.dumps(
+                shapely_to_dict(prop['property_coordinate'])
+            )
+            entry['building_polygon'] = json.dumps(
+                shapely_to_dict(building['building_polygon'])
+            )
+            result.append(entry)
+            continue
+    pd.DataFrame(result).to_csv(
+        f'resources/data/cache/join_property_to_buildings_temp_{index}.csv',
+        index=False
     )
 
-    # group by building id
 
-    def polygon_to_json(coordinate_list):
-        return {
-            "type": "Polygon",
-            "coordinates": coordinate_list
-        }
+if __name__ == '__main__':
+    processes = []
+    buildings = df_building.to_dict('records')
+    properties = df_property.to_dict('records')
+    chunk_size = len(buildings) / jobs
+    for j in range(jobs):
+        chunk = buildings[round(j * chunk_size): round((j + 1) * chunk_size)]
+        process = multiprocessing.Process(
+            target=chunk_process,
+            args=[j, properties, chunk],
+        )
+        process.start()
+        processes.append(process)
 
-    new_building = []
-    length = len(df_building['building_id'].unique())
-    for i, bid in enumerate(df_building['building_id'].unique()):
-        if i % 1000 == 0:
-            print(f'{i+1}/{length}')
-        df = df_building[df_building['building_id'] == bid]
-        polygons = [shape(json.loads(x)) for x in df['geometry']]
-        union_geometry = unary_union(polygons)
-        if isinstance(union_geometry, MultiPolygon):
-            # one of the buildings did not have a proper union, so we skip it
-            continue
-        coordinate_list = [list(union_geometry.exterior.coords)]
-        union_geometry_json = json.dumps(polygon_to_json(coordinate_list))
-        new_building.append({
-            'building_id': bid,
-            'roof_type': df['roof_type'].mode()[0],
-            'highest_elevation_m': df['highest_elevation_m'].max(),
-            'geometry': union_geometry_json,
-            'area_m2': area(union_geometry_json),
-            'sub_buildings': len(df),
-        })
+    for process in processes:
+        process.join()
 
-    df_building = pd.DataFrame(new_building)
-    df_building.to_csv(f'resources/data/cache/{filename}_1.csv', index=False)
+    df = pd.concat(
+        [
+            pd.read_csv(
+                'resources/data/cache/'
+                f'join_property_to_buildings_temp_{index}.csv'
+            )
+            for index in range(jobs)
+        ],
+        ignore_index=True
+    )
+    for index in range(jobs):
+        Path(
+            f'resources/data/cache/join_property_to_buildings_temp_{index}.csv'
+        ).unlink()
 
-# join using wether it lies there or not
+    # write result to csv
+    df.to_csv(
+        'resources/data/generated/join_property_to_buildings.csv',
+        index=False
+    )

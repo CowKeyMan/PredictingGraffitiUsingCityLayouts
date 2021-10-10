@@ -1,9 +1,18 @@
+"""
+This filters the building-footprints-2009 csv such that buildings which are
+situated outside of the vancouver plot are removed. The dataset itself is
+cleaned up to meet a standard format as well
+"""
+
 import pandas as pd
 import json
 from shapely.ops import unary_union
 from shapely.geometry import shape, MultiPolygon
 from shapely.geometry import mapping as shapely_to_dict
 from area import area
+from shapely.errors import ShapelyDeprecationWarning
+import warnings
+warnings.filterwarnings("ignore", category=ShapelyDeprecationWarning)
 
 # get polygon of the entirety of vancouver so we can see
 # which buildings are on top of it
