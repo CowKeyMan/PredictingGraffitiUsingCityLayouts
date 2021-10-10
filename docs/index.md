@@ -1,4 +1,4 @@
-## Can light pollution deter graffiti?
+## Predicting Graffiti using City Layouts
 
 ### What do we do?
 
