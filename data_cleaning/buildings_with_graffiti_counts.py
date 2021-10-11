@@ -50,7 +50,7 @@ for (lon, lat), count in graffiti_lat_lon_to_counts.items():
         'graffiti_count'
     ] += count
 
-df_building['graffiti_count'] = df_building['graffiti_count'].astype(int)
+df_building['graffiti_count'] = df_building['graffiti_count']
 df_building.drop(columns=['lon', 'lat'], inplace=True)
 df_building['property_coordinate'] = [
     json.dumps(shapely_to_dict(x)) for x in df_building['property_coordinate']

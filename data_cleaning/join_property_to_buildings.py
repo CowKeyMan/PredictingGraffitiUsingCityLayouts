@@ -1,7 +1,7 @@
 """
 The properties contain the addresses of the buildings, hence they are joined
 To do this, the coordinate of the properties are taken and intersected over
-each building. If the property coordinate intersects with the building
+each building polygon. If the property coordinate intersects with the building
 polygon, then we merge them
 """
 
