@@ -7,40 +7,44 @@ import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
 
-# Read CSV
-df = pd.read_csv(
-    'resources/data/graffiti_combined.csv',
-    dtype={
-        'Geo Local Area': str,
-        'Count': int,
-        'SITE_ID': str,
-        'Latitude': float,
-        'Longitude': float,
-        'Type': str,
-    }
+
+def lower_and_underscore(string):
+    return string.lower().replace(' ', '_')
+
+
+# street lights
+df_lights = pd.read_csv(
+    'resources/data/original/street-lighting-poles.csv', delimiter=';'
 )
+df_lights = df_lights[['Geo Local Area']].dropna()
+df_lights['geo_local_area'] \
+    = df_lights['Geo Local Area'].map(lower_and_underscore)
+df_lights_to_merge = df_lights.groupby('geo_local_area').size() \
+    .reset_index(name='street_light_counts')
 
-# Drop unecessary columns
-df = df[['Type', 'Geo Local Area', 'Count']]
+# buildings
+df_buildings \
+    = pd.read_csv('resources/data/generated/buildings_all_features.csv')
+df_buildings['geo_local_area'] \
+    = df_buildings['geo_local_area'].map(lower_and_underscore)
+df_buildings_to_merge = df_buildings.groupby('geo_local_area').size() \
+    .reset_index(name='building_counts')
 
-# Change both street lighting and buildings type to 'L'
-df['Type'].replace({'S': 'L', 'B': 'L'}, inplace=True)
+# graffiti
+df_graffiti_to_merge = df_buildings[['graffiti_count', 'geo_local_area']] \
+    .groupby('geo_local_area').sum().reset_index()
 
-grouped_values = []
-# Group based on 'Geo Local Area' and count light sources and graffiti amount
-for area in df['Geo Local Area'].unique():
-    df_area = df[df['Geo Local Area'] == area]
-    light_amount = df_area[df_area['Type'] == 'L']['Count'].sum()
-    graffiti_amount = df_area[df_area['Type'] == 'G']['Count'].sum()
-    grouped_values.append([area, light_amount, graffiti_amount])
-df = pd.DataFrame(
-    grouped_values,
-    columns=['Geo Local Area', 'Light Sources', 'Graffiti Count']
-)
+# merge
+
+df = df_lights_to_merge\
+    .merge(df_buildings_to_merge, on='geo_local_area') \
+    .merge(df_graffiti_to_merge, on='geo_local_area')
+df['Lights'] = df['street_light_counts'] + df['building_counts']
+df['Graffiti'] = df['graffiti_count']
 
 # plot
 fig, scatter = plt.subplots(figsize=(10, 6), dpi=100)
 scatter \
-    = sns.regplot(x='Light Sources', y='Graffiti Count', data=df, fit_reg=True)
+    = sns.regplot(x='Lights', y='Graffiti', data=df, fit_reg=True)
 plt.show()
 fig.savefig('resources/images/graffiti_vs_light_sources.png')
