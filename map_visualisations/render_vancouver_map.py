@@ -19,7 +19,7 @@ colours = sns.color_palette("gray", 10)
 
 vancouver_colour = colours[4]
 edge_colour = colours[5]
-buildings_colour = colours[7]
+buildings_colour = (0, 0, 0)
 
 argparser = argparse.ArgumentParser(conflict_handler='resolve')
 argparser.add_argument(
@@ -31,10 +31,13 @@ argparser.add_argument(
 args = vars(argparser.parse_known_args()[0])
 width_inches = args['width']
 
-vancouver = gpd.read_file('resources/data/local-area-boundary.csv')
+vancouver = gpd.read_file('resources/data/original/local-area-boundary.csv')
 vancouver['geometry'] = [shape(json.loads(x)) for x in vancouver['Geom']]
-buildings = gpd.read_file('resources/data/property-parcel-polygons.csv')
-buildings['geometry'] = [shape(json.loads(x)) for x in buildings['Geom']]
+buildings = gpd.read_file(
+    'resources/data/generated/buildings_with_graffiti_counts.csv'
+)
+buildings['geometry'] \
+    = [shape(json.loads(x)) for x in buildings['building_polygon']]
 fig, ax = plt.subplots()
 ax.axis('off')
 vancouver.plot(

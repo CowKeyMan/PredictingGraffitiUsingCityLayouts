@@ -1,5 +1,5 @@
-import pandas as pd
 import geopandas as gpd
+import matplotlib
 from matplotlib import pyplot as plt
 from shapely.geometry import shape
 import json
@@ -19,18 +19,24 @@ argparser.add_argument(
 args = vars(argparser.parse_known_args()[0])
 width_inches = args['width']
 
-vancouver = gpd.read_file('resources/data/local-area-boundary.csv')
+vancouver = gpd.read_file('resources/data/original/local-area-boundary.csv')
 vancouver['geometry'] = [shape(json.loads(x)) for x in vancouver['Geom']]
-buildings = gpd.read_file('resources/data/property-parcel-polygons.csv')
-buildings['geometry'] = [shape(json.loads(x)) for x in buildings['Geom']]
+buildings \
+    = gpd.read_file('resources/data/generated/buildings_all_features.csv')
+buildings['geometry'] \
+    = [shape(json.loads(x)) for x in buildings['building_polygon']]
 
-buildings_with_graffiti_counts = pd.read_csv(
-    'resources/data/buildings_with_graffiti_counts.csv'
-)
+buildings['graffiti_count'] = buildings['graffiti_count'].astype(float)
 
-buildings = buildings.merge(
-    buildings_with_graffiti_counts, left_on='SITE_ID', right_on='SITE_ID'
-).reset_index()
+# custom colourmap
+norm = matplotlib.colors.Normalize(0, buildings['graffiti_count'].max())
+colors = [
+    [norm(0), buildings_colour],
+    [norm(0.99), buildings_colour],
+    [norm(1), (246 / 255, 124 / 255, 82 / 255)],
+    [norm(buildings['graffiti_count'].max()), "darkred"]
+]
+cmap = matplotlib.colors.LinearSegmentedColormap.from_list("", colors)
 
 fig, ax = plt.subplots()
 ax.axis('off')
@@ -38,16 +44,16 @@ vancouver.plot(
     ax=ax,
     edgecolor=edge_colour,
     facecolor=vancouver_colour,
-    antialiased=False,
+    antialiased=True,
 )
-buildings = buildings.sort_values('Graffiti_count')
+buildings = buildings.sort_values('graffiti_count')
 buildings.plot(
     ax=ax,
     edgecolor=buildings_colour,
-    antialiased=False,
-    column='Graffiti_count',
+    antialiased=True,
+    column='graffiti_count',
     legend=True,
-    cmap='OrRd'
+    cmap=cmap,
 )
 
 xlim = ax.get_xlim()
@@ -61,7 +67,7 @@ fig.savefig(
     'resources/images/vancouver_buildings_heatmap.png',
     bbox_inches='tight',
     transparent="False",
-    pad_inches=0
+    pad_inches=0.4
 )
 
 plt.show()
