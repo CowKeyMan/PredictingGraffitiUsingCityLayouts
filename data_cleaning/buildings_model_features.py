@@ -26,4 +26,8 @@ for var_name in to_one_hot_encode:
 
 df.drop(columns=to_one_hot_encode, inplace=True)
 
+#Replacing graffiti count with 0 and 1
+#df.loc[df['graffiti_count']>1, 'graffiti_count']=1
+#df.loc[df['graffiti_count']<1, 'graffiti_count']=0
+
 df.to_csv('resources/data/generated/buildings_model_features.csv', index=False)
