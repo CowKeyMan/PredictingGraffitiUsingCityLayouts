@@ -14,12 +14,13 @@ df.drop(
         'street',
         'building_polygon',
         'lat',
-        'lon'
+        'lon',
+        'geo_local_area',
     ],
     inplace=True
 )
 
-to_one_hot_encode = ['roof_type', 'geo_local_area', 'street_type']
+to_one_hot_encode = ['roof_type', 'street_type']
 
 for var_name in to_one_hot_encode:
     df = pd.concat([df, pd.get_dummies(df[var_name], prefix=var_name)], axis=1)
