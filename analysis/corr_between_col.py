@@ -5,11 +5,13 @@ import statsmodels.api as sm
 import seaborn as sb
 import matplotlib.pyplot as plt
 
-df = pd.read_csv('buildings_model_features.csv')
+df = pd.read_csv(
+    'resources/data/generated/buildings_and_nearby_objects.csv'
+)
 print('df', df)
 
-#print(df.to_string())
-
+df.loc[df['graffiti_count']>1, 'graffiti_count']=1
+df.loc[df['graffiti_count']<1, 'graffiti_count']=0
 xtrain = df[['highest_elevation_m', 'area_m2', 'sub_buildings','nearby_buildings_count','nearby_graffiti_count',
              'nearby_graffiti_average','nearby_graffiti_buildings','nearby_buildings_average_height','nearby_buildings_median_height',
              'nearby_buildings_total_sub_buildings','nearby_buildings_average_sub_buildings','nearby_buildings_median_sub_buildings',
