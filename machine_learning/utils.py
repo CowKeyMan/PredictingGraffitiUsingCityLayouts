@@ -4,14 +4,14 @@ Useful functions to clean up the code for building models
 
 import pandas as pd
 from sklearn.preprocessing import StandardScaler
+from sklearn.model_selection import StratifiedKFold
 
 
-def split_in_folds(df: pd.DataFrame, n):
-    df = df.sample(frac=1, ignore_index=True)
+def split_in_folds(df: pd.DataFrame, n, target_feature):
+    skf = StratifiedKFold(n, shuffle=True)
     folds = []
-    fold_size = len(df) / n
-    for i in range(n):
-        folds.append(df.iloc[round(fold_size * i): round(fold_size * (i + 1))])
+    for _, test_indices in skf.split(df, df[target_feature]):
+        folds.append(df.iloc[test_indices])
     return folds
 
 
