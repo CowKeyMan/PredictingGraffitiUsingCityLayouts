@@ -49,3 +49,8 @@ def regularize_features(df_train, df_test, features):
         df_test = df_test.copy()
         df_test[features] = sc.transform(df_test[features])
     return df_train, df_test
+
+
+def print_stdout_and_file(string, file_pointer):
+    print(string, flush=True)
+    print(string, file=file_pointer, flush=True)
