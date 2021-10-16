@@ -1,3 +1,4 @@
 .idea
 __pycache__
 desktop.ini
+.vimspector.json
