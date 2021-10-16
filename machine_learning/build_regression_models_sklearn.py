@@ -11,7 +11,8 @@ from models import regression_models as models
 from sklearn.model_selection import RandomizedSearchCV
 import pandas as pd
 import numpy as np
-from utils import split_in_folds, extract_target_feature, regularize_features
+from utils import \
+    split_in_folds_regression, extract_target_feature, regularize_features
 np.random.seed(42)
 # warnings.simplefilter("ignore")
 
@@ -43,28 +44,35 @@ df = pd.read_csv('resources/data/generated/buildings_model_features.csv')
 for name, model in models.items():
     print(f'Now training {name}')
     # Hyper parameter tuning on subset of the dataset
-    folds = split_in_folds(df, len(df) // 5000, target_value)
+    folds = split_in_folds_regression(df, len(df) // 5000, target_value)
     df_tuning_full = pd.concat(folds[:1])  # 5000 exmamples
 
     print('\tTuning...')
     tuner = RandomizedSearchCV(
-        model['class'](),
+        model['class'](**model['set_parameters']),
         model['hyperparameters'],
         n_jobs=-1,
         refit=False
     )
+    df_tuning_full, _ \
+        = regularize_features(df_tuning_full, None, continuous_variables)
     df_tuning, y_tuning = extract_target_feature(df_tuning_full, target_value)
-    tuner.fit(df_tuning, y_tuning)
+    with warnings.catch_warnings():
+        warnings.filterwarnings("ignore", category=UserWarning)
+        tuner.fit(df_tuning, y_tuning)
     best_params = tuner.best_params_ | model['set_parameters']
     print(f'\t\tBest Params: {best_params}')
 
     # k-fold validation
-    folds = split_in_folds(df, fold_amount, target_value)
+    folds = split_in_folds_regression(df, fold_amount, target_value)
     for i in range(fold_amount):
         df_test = folds[i]
         df_train = pd.concat(folds[0:i] + folds[i + 1:fold_amount])
         df_test, y_test = extract_target_feature(df_test, target_value)
         df_train, y_train = extract_target_feature(df_train, target_value)
+
+        print(df_train.columns)
+        print(y_test)
 
         df_train, df_test \
             = regularize_features(df_train, df_test, continuous_variables)
