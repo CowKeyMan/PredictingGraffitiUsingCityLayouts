@@ -6,3 +6,5 @@ local_area_population.csv
 combined_streets.csv
 buildings_with_graffiti_counts.csv
 buildings_with_local_area.csv
+buildings_model_features.csv 
+buildings_all_features.csv
