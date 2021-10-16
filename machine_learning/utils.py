@@ -7,7 +7,7 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import StratifiedKFold
 
 
-def split_in_folds(df: pd.DataFrame, n, target_feature):
+def split_in_folds_classification(df: pd.DataFrame, n, target_feature):
     skf = StratifiedKFold(n, shuffle=True)
     folds = []
     for _, test_indices in skf.split(df, df[target_feature]):
