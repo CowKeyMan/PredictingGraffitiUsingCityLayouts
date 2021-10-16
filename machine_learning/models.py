@@ -1,11 +1,13 @@
 # regression
-from sklearn.linear_model import LinearRegression, Ridge, Lasso, ElasticNet
-from sklearn.svm import SVR
+from sklearn.linear_model import LinearRegression, Ridge, Lasso
 from sklearn.neural_network import MLPRegressor
-from sklearn.tree import DecisionTreeRegressor
+# from sklearn.tree import DecisionTreeRegressor
+# from sklearn.svm import SVR
 
 # classification
 from sklearn.linear_model import LogisticRegression
+from sklearn.svm import SVC
+from sklearn.neural_network import MLPClassifier
 
 
 pow_10_paramter = [0.0001, 0.001, 0.01, 0.1, 1, 10, 100]
@@ -14,7 +16,9 @@ regression_models = {
     "LinearRegression": {
         "class": LinearRegression,
         "hyperparameters": {},
-        "set_parameters": {}
+        "set_parameters": {
+            "n_jobs": -1,
+        }
     },
     "Ridge": {
         "class": Ridge,
@@ -31,9 +35,7 @@ regression_models = {
                 "saga",
             ]
         },
-        "set_parameters": {
-            "max_iter": -1
-        }
+        "set_parameters": {}
     },
     "Lasso": {
         "class": Lasso,
@@ -44,14 +46,6 @@ regression_models = {
             "tol": 0.0001,
             "max_iter": 10000
         }
-    },
-    "ElasticNet": {
-        "class": ElasticNet,
-        "hyperparameters": {
-            "alpha": pow_10_paramter,
-            "tol": pow_10_paramter,
-        },
-        "set_parameters": {}
     },
     # "SVR": {
     #     "class": SVR,
@@ -97,10 +91,57 @@ classification_models = {
     "LogisticRegression": {
         "class": LogisticRegression,
         "hyperparameters": {
-            "penalty": ["l1", "l2", "elasticnet", None],
             "C": pow_10_paramter,
-
         },
-        "set_parameters": {}
+        "set_parameters": {
+            "n_jobs": -1,
+            "max_iter": 200
+        }
     },
+    "BalancedLogisticRegression": {
+        "class": LogisticRegression,
+        "hyperparameters": {
+            "C": pow_10_paramter,
+        },
+        "set_parameters": {
+            "n_jobs": -1,
+            "max_iter": 200,
+            "class_weight": "balanced"
+        }
+    },
+    # "SVM": {
+    #     "class": SVC,
+    #     "hyperparameters": {
+    #         "C": pow_10_paramter,
+    #         "kernel": ["linear", "poly", "rbf", "sigmoid"],
+    #         "degree": list(range(1, 6, 1)),
+    #     },
+    #     "set_parameters": {}
+    # },
+    # "BalancedSVM": {
+    #     "class": SVC,
+    #     "hyperparameters": {
+    #         "C": pow_10_paramter,
+    #         "kernel": ["linear", "poly", "rbf", "sigmoid"],
+    #         "degree": list(range(1, 3, 1)),
+    #     },
+    #     "set_parameters": {
+    #         "class_weight": "balanced"
+    #     }
+    # },
+    "MLPClassifier": {
+        "class": MLPClassifier,
+        "hyperparameters": {
+            "hidden_layer_sizes": [
+                (200, 200), (100, 100), (100, 100, 100), (200, 100, 100)
+            ],
+            "activation": ["identity", "logistic", "tanh", "relu"],
+            "solver": ["lbfgs", "sgd", "adam"],
+            "alpha": pow_10_paramter,
+        },
+        "set_parameters": {
+            "early_stopping": True,
+            "max_iter": 500,
+        }
+    }
 }
