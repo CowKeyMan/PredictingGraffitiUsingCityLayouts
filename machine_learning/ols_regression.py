@@ -34,12 +34,11 @@ df = pd.read_csv('resources/data/generated/buildings_model_features.csv')
 df, _ = regularize_features(df, None, continuous_variables)
 y = df['graffiti_count']
 x = df.drop(columns=['graffiti_count'])
-x = x.drop(columns=df.iloc[:, 20:42])
 
-s = ' + '.join(x.columns.tolist())
-form = build_formula(x.columns.tolist())
-# formula = "graffiti_count ~ " + s + form
-formula = "graffiti_count ~ " + s
+singular_variables = ' + '.join(x.columns.tolist())
+joint_variables = build_formula(x.columns.tolist())
+# formula = "graffiti_count ~ " + s + joint_variables
+formula = "graffiti_count ~ " + singular_variables
 
 fit = smf.ols(formula, data=df).fit()
 print(fit.summary())
