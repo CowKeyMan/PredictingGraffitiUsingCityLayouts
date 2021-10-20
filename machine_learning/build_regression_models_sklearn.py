@@ -14,37 +14,17 @@ import numpy as np
 from utils import (
     split_in_folds_regression,
     extract_target_feature,
-    regularize_features,
+    scale_features,
     print_stdout_and_file,
 )
 np.random.seed(42)
 from sklearn.exceptions import ConvergenceWarning
+from utils import continuous_variables
 
 file_pointer \
     = open('resources/machine_learning_results/regression_models.txt', 'w')
 
 fold_amount = 5
-continuous_variables = [
-    'highest_elevation_m',
-    'area_m2',
-    'sub_buildings',
-    'geo_local_area_area_m2',
-    'geo_local_area_population',
-    'pop_density',
-]
-for name in ['one_house_away', 'two_houses_away', 'four_houses_away']:
-    continuous_variables += [
-        f'{name}_buildings_count',
-        f'{name}_graffiti_count',
-        f'{name}_graffiti_average',
-        f'{name}_graffiti_buildings',
-        f'{name}_buildings_average_height',
-        f'{name}_buildings_median_height',
-        f'{name}_buildings_total_sub_buildings',
-        f'{name}_buildings_average_sub_buildings',
-        f'{name}_buildings_median_sub_buildings',
-        f'{name}_street_lights',
-    ]
 
 target_value = 'graffiti_count'
 
@@ -64,7 +44,7 @@ for name, model in models.items():
         n_iter=20,
     )
     df_tuning_full, _ \
-        = regularize_features(df_tuning_full, None, continuous_variables)
+        = scale_features(df_tuning_full, None, continuous_variables)
     df_tuning, y_tuning = extract_target_feature(df_tuning_full, target_value)
     with warnings.catch_warnings():
         warnings.filterwarnings("ignore", category=UserWarning)
@@ -82,7 +62,7 @@ for name, model in models.items():
         df_train, y_train = extract_target_feature(df_train, target_value)
 
         df_train, df_test \
-            = regularize_features(df_train, df_test, continuous_variables)
+            = scale_features(df_train, df_test, continuous_variables)
 
         regressor = model['class'](**best_params)
         print_stdout_and_file(

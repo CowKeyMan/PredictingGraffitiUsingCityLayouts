@@ -7,6 +7,28 @@ import pandas as pd
 from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import StratifiedKFold
 
+continuous_variables = [
+    'highest_elevation_m',
+    'area_m2',
+    'sub_buildings',
+    'geo_local_area_area_m2',
+    'geo_local_area_population',
+    'pop_density',
+]
+for name in ['one_house_away', 'two_houses_away', 'four_houses_away']:
+    continuous_variables += [
+        f'{name}_buildings_count',
+        f'{name}_graffiti_count',
+        f'{name}_graffiti_average',
+        f'{name}_graffiti_buildings',
+        f'{name}_buildings_average_height',
+        f'{name}_buildings_median_height',
+        f'{name}_buildings_total_sub_buildings',
+        f'{name}_buildings_average_sub_buildings',
+        f'{name}_buildings_median_sub_buildings',
+        f'{name}_street_lights',
+    ]
+
 
 def split_in_folds_regression(df: pd.DataFrame, n, target_feature):
     df_sorted = df.sort_values(target_feature)
@@ -41,7 +63,7 @@ def extract_target_feature(df, target_feature):
     return df, target
 
 
-def regularize_features(df_train, df_test, features):
+def scale_features(df_train, df_test, features):
     sc = StandardScaler()
     df_train = df_train.copy()
     df_train[features] = sc.fit_transform(df_train[features])
