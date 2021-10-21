@@ -48,6 +48,7 @@ roof.set_ylabel("Amount of Building",fontsize=7)
 roof.tick_params(labelsize=5)
 plt.setp(roof.get_legend().get_texts(), fontsize='5')
 plt.setp(roof.get_legend().get_title(), fontsize='5') # for legend title
+plt.legend(labels=['No Graffiti', 'Graffiti'], fontsize='7')
 
 street = fig.add_subplot(122)
 street = sb.countplot(
@@ -63,5 +64,6 @@ street.set_ylabel("Amount of Building",fontsize=7)
 street.tick_params(labelsize=5)
 plt.setp(street.get_legend().get_texts(), fontsize='5')
 plt.setp(street.get_legend().get_title(), fontsize='5') # for legend title
-
+plt.savefig('barchart.png')
+plt.legend(labels=['No Graffiti', 'Graffiti'], fontsize='7')
 plt.show()
