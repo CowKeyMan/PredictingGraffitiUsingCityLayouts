@@ -1,0 +1,15 @@
+intro
+
+
+results
+  % correlation
+  % FN vs FP models (which to prioritize? This might depend on the government body at hand)
+  % Predict where new graffiti will be, first using FN then using FP models
+
+
+all visualisations
+  plots of important features map right next to graffiti map
+  scatter plots (sns regplot) of graffiti count against important features
+  bar graphs next to each other with graffiti buildings and non graffiti buildings (separated by 1)streettype 2)rooftype)
+  Pie chart of buildings with graffiti (separated by 1)streettype 2)rooftype)
+  Street visualisations
