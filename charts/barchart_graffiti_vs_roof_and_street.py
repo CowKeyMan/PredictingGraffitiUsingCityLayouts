@@ -31,16 +31,37 @@ print(df.shape)
 df['graffiti_count'] = (df['graffiti_count'] > 0).astype(float)
 print(df.head(n=100).to_string())
 print(df.shape)
+fig = plt.figure(figsize=(7,3),dpi=144)
+
+roof = fig.add_subplot(121)
 
 roof = sb.countplot(
     x='roof_type',
     hue='graffiti_count',
     data=df
 )
-plt.show()
+for p in roof.patches:
+    roof.annotate(f'\n{p.get_height()}', (p.get_x()+0.2, p.get_height()), ha='center', color='black', size=5)
+roof.axes.set_title("Roof Type",fontsize=15)
+roof.set_xlabel("Roof Type",fontsize=7)
+roof.set_ylabel("Amount of Building",fontsize=7)
+roof.tick_params(labelsize=5)
+plt.setp(roof.get_legend().get_texts(), fontsize='5')
+plt.setp(roof.get_legend().get_title(), fontsize='5') # for legend title
+
+street = fig.add_subplot(122)
 street = sb.countplot(
     x='street_type',
     hue='graffiti_count',
     data=df
 )
+for p in street.patches:
+    street.annotate(f'\n{p.get_height()}', (p.get_x()+0.2, p.get_height()), ha='center', color='black', size=5)
+street.axes.set_title("Street Type",fontsize=15)
+street.set_xlabel("Roof Type",fontsize=7)
+street.set_ylabel("Amount of Building",fontsize=7)
+street.tick_params(labelsize=5)
+plt.setp(street.get_legend().get_texts(), fontsize='5')
+plt.setp(street.get_legend().get_title(), fontsize='5') # for legend title
+
 plt.show()
