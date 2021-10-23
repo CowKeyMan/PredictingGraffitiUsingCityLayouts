@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Additional Stats and Visualization
+title: Stats and Visualization
 description: This is additional statistics and visualization page
 ---
 
