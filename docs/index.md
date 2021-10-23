@@ -1,3 +1,9 @@
+---
+layout: default
+title: Introduction
+description: Introduction page
+---
+
 ## Predicting Graffiti using City Layouts
 
 ### What do we do?
