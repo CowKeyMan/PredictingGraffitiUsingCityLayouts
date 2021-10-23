@@ -3,3 +3,5 @@ __pycache__
 desktop.ini
 .vimspector.json
 .ipynb_checkpoints
+
+.DS_Store
