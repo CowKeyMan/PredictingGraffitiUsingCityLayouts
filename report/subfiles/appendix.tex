@@ -1,0 +1,348 @@
+\chapter{All Model Features}\label{app:all_model_features}
+
+highest\_elevation\_m, area\_m2, sub\_buildings, one\_house\_away\_buildings\_count, one\_house\_away\_graffiti\_count, one\_house\_away\_graffiti\_average, one\_house\_away\_graffiti\_buildings, one\_house\_away\_buildings\_average\_height, one\_house\_away\_buildings\_median\_height, one\_house\_away\_buildings\_total\_sub\_buildings, one\_house\_away\_buildings\_average\_sub\_buildings, one\_house\_away\_buildings\_median\_sub\_buildings, one\_house\_away\_street\_lights, two\_houses\_away\_buildings\_count, two\_houses\_away\_graffiti\_count, two\_houses\_away\_graffiti\_average, two\_houses\_away\_graffiti\_buildings, two\_houses\_away\_buildings\_average\_height, two\_houses\_away\_buildings\_median\_height, two\_houses\_away\_buildings\_total\_sub\_buildings, two\_houses\_away\_buildings\_average\_sub\_buildings, two\_houses\_away\_buildings\_median\_sub\_buildings, two\_houses\_away\_street\_lights, four\_houses\_away\_buildings\_count, four\_houses\_away\_graffiti\_count, four\_houses\_away\_graffiti\_average, four\_houses\_away\_graffiti\_buildings, four\_houses\_away\_buildings\_average\_height, four\_houses\_away\_buildings\_median\_height, four\_houses\_away\_buildings\_total\_sub\_buildings, four\_houses\_away\_buildings\_average\_sub\_buildings, four\_houses\_away\_buildings\_median\_sub\_buildings, four\_houses\_away\_street\_lights, geo\_local\_area\_area\_m2, geo\_local\_area\_population, pop\_density, roof\_type\_Complex, roof\_type\_Flat, roof\_type\_Pitched, street\_type\_arterial, street\_type\_collector, street\_type\_residential, street\_type\_secondary\_arterial
+
+\chapter{Model Parameters Code}\label{app:model_parameters}
+
+This appendix shows the model parameters options used as python code. The format was purposefully chosen to be similar to the JSON format in case this was to be ported to a configuration file.
+
+\begin{verbatim}
+
+pow_10_paramter = [0.0001, 0.001, 0.01, 0.1, 1, 10, 100]
+
+regression_models = {
+    "LinearRegression": {
+        "class": sklearn.linear_model.LinearRegression,
+        "hyperparameters": {},
+        "set_parameters": {
+            "n_jobs": -1,
+        }
+    },
+    "Ridge": {
+        "class": sklearn.linear_model.Ridge,
+        "hyperparameters": {
+            "alpha": pow_10_paramter,
+            "tol": pow_10_paramter,
+            "solver": [
+                "auto",
+                "svd",
+                "cholesky",
+                "lsqr",
+                "sparse_cg",
+                "sag",
+                "saga",
+            ]
+        },
+        "set_parameters": {}
+    },
+    "Lasso": {
+        "class": sklearn.linear_model.Lasso,
+        "hyperparameters": {
+            "alpha": pow_10_paramter,
+        },
+        "set_parameters": {
+            "tol": 0.0001,
+            "max_iter": 10000
+        }
+    },
+    "MLPRegressor": {
+        "class": sklearn.neural_network.MLPRegressor,
+        "hyperparameters": {
+            "hidden_layer_sizes": [
+                (200, 200), (100, 100), (100, 100, 100), (200, 100, 100)
+            ],
+            "activation": ["identity", "logistic", "tanh", "relu"],
+            "solver": ["lbfgs", "sgd", "adam"],
+            "alpha": pow_10_paramter,
+        },
+        "set_parameters": {
+            "early_stopping": True,
+            "max_iter": 500,
+        }
+    }
+}
+
+classification_models = {
+    "LogisticRegression": {
+        "class": sklearn.linear_model.LogisticRegression,
+        "hyperparameters": {
+            "C": pow_10_paramter,
+        },
+        "set_parameters": {
+            "n_jobs": -1,
+            "max_iter": 200
+        }
+    },
+    "BalancedLogisticRegression": {
+        "class": sklearn.linear_model.LogisticRegression,
+        "hyperparameters": {
+            "C": pow_10_paramter,
+        },
+        "set_parameters": {
+            "n_jobs": -1,
+            "max_iter": 200,
+            "class_weight": "balanced"
+        }
+    },
+    "MLPClassifier": {
+        "class": sklearn.neural_network.MLPClassifier,
+        "hyperparameters": {
+            "hidden_layer_sizes": [
+                (200, 200), (100, 100), (100, 100, 100), (200, 100, 100)
+            ],
+            "activation": ["identity", "logistic", "tanh", "relu"],
+            "solver": ["lbfgs", "sgd", "adam"],
+            "alpha": pow_10_paramter,
+        },
+        "set_parameters": {
+            "early_stopping": True,
+            "max_iter": 500,
+        }
+    }
+}
+
+\end{verbatim}
+
+\chapter{Full Results}\label{app:full_results}
+
+This appendix shows the full results of the trained models. First we show the results of the regression models and then we show those of the classification models.
+
+\section{Regression Models}
+\begin{verbatim}
+LinearRegression
+		Best Params: {'n_jobs': -1}
+		Fitting fold 1/5
+			r^2 on train: 0.604810872501663
+			r^2 on test: 0.602735617491803
+			r^2 on test not 0: 0.40932809270610593
+
+		Fitting fold 2/5
+			r^2 on train: 0.6057825097767984
+			r^2 on test: 0.5983170039845684
+			r^2 on test not 0: 0.37047783129055967
+
+		Fitting fold 3/5
+			r^2 on train: 0.5938622236974815
+			r^2 on test: 0.637858310082432
+			r^2 on test not 0: 0.42882042181419155
+
+		Fitting fold 4/5
+			r^2 on train: 0.6143160363114665
+			r^2 on test: 0.556919897520383
+			r^2 on test not 0: 0.3427041111951884
+
+		Fitting fold 5/5
+			r^2 on train: 0.606295950014363
+			r^2 on test: 0.5962737548077484
+			r^2 on test not 0: 0.3466456468442167
+
+Ridge
+		Best Params: {'tol': 10, 'solver': 'saga', 'alpha': 0.1}
+		Fitting fold 1/5
+			r^2 on train: 0.5959033693753599
+			r^2 on test: 0.5897855828772042
+			r^2 on test not 0: 0.29353447003963984
+
+		Fitting fold 2/5
+			r^2 on train: 0.5944071266025769
+			r^2 on test: 0.6132781891163086
+			r^2 on test not 0: 0.397107616253884
+
+		Fitting fold 3/5
+			r^2 on train: 0.5963030563797831
+			r^2 on test: 0.6178928473501317
+			r^2 on test not 0: 0.43354017996331506
+
+		Fitting fold 4/5
+			r^2 on train: 0.6021928081960923
+			r^2 on test: 0.5681189460151417
+			r^2 on test not 0: 0.3093194836548464
+
+		Fitting fold 5/5
+			r^2 on train: 0.6032687634903349
+			r^2 on test: 0.5873165844909658
+			r^2 on test not 0: 0.39821716410681984
+
+Lasso
+		Best Params: {'alpha': 0.0001, 'tol': 0.0001, 'max_iter': 10000}
+		Fitting fold 1/5
+			r^2 on train: 0.601668565902004
+			r^2 on test: 0.615154345096635
+			r^2 on test not 0: 0.4012183382401111
+
+		Fitting fold 2/5
+			r^2 on train: 0.6105152645125385
+			r^2 on test: 0.5769134698563446
+			r^2 on test not 0: 0.33234511018722546
+
+		Fitting fold 3/5
+			r^2 on train: 0.6030295669805608
+			r^2 on test: 0.6088369388640831
+			r^2 on test not 0: 0.38269822309692536
+
+		Fitting fold 4/5
+			r^2 on train: 0.6016016089606414
+			r^2 on test: 0.6119293483115629
+			r^2 on test not 0: 0.4264429862940726
+
+		Fitting fold 5/5
+			r^2 on train: 0.608313883247569
+			r^2 on test: 0.5881777101384241
+			r^2 on test not 0: 0.3663869068730805
+
+MLPRegressor
+		Best Params: {'solver': 'sgd', 'hidden_layer_sizes': (100, 100), 'alpha': 1, 'activation': 'relu', 'early_stopping': True, 'max_iter': 500}
+		Fitting fold 1/5
+			r^2 on train: 0.6583630475407372
+			r^2 on test: 0.6023958144772487
+			r^2 on test not 0: 0.4238171245000216
+
+		Fitting fold 2/5
+			r^2 on train: 0.6299781799908495
+			r^2 on test: 0.6413926930989139
+			r^2 on test not 0: 0.4186273581481599
+
+		Fitting fold 3/5
+			r^2 on train: 0.6340920042110348
+			r^2 on test: 0.637685957735554
+			r^2 on test not 0: 0.4153368443725123
+
+		Fitting fold 4/5
+			r^2 on train: 0.6375479497238612
+			r^2 on test: 0.6308132115181082
+			r^2 on test not 0: 0.4353551223538782
+
+		Fitting fold 5/5
+			r^2 on train: 0.6539979725087999
+			r^2 on test: 0.6097699517695414
+			r^2 on test not 0: 0.37628497918505943
+\end{verbatim}
+
+\section{Regression Models}
+\begin{verbatim}
+LogisticRegression
+		Best Params: {'C': 0.1, 'n_jobs': -1, 'max_iter': 200}
+		Fitting fold 1/5
+			accuracy on train: 0.9596210511889262
+			f1 on train: 0.7107620566940728
+			accuracy on test: 0.9586788186116632
+			precision on test: 0.8077777777777778
+			recall on test: 0.6283491789109766
+			f1 on test: 0.7068546426835197
+
+		Fitting fold 2/5
+			accuracy on train: 0.9595353936819023
+			f1 on train: 0.7096853490658801
+			accuracy on test: 0.9595696566847118
+			precision on test: 0.8210645526613817
+			recall on test: 0.6266205704407951
+			f1 on test: 0.7107843137254902
+
+		Fitting fold 3/5
+			accuracy on train: 0.9595011306790927
+			f1 on train: 0.710009813542689
+			accuracy on test: 0.9590899746453779
+			precision on test: 0.819634703196347
+			recall on test: 0.6205704407951599
+			f1 on test: 0.7063453025086079
+
+		Fitting fold 4/5
+			accuracy on train: 0.959792366202974
+			f1 on train: 0.7122716685055781
+			accuracy on test: 0.9577879805386144
+			precision on test: 0.8141695702671312
+			recall on test: 0.6058772687986171
+			f1 on test: 0.6947472745292369
+
+		Fitting fold 5/5
+			accuracy on train: 0.9589700541355445
+			f1 on train: 0.7061710219604956
+			accuracy on test: 0.9619680668813815
+			precision on test: 0.8380202474690663
+			recall on test: 0.6444636678200693
+			f1 on test: 0.7286063569682152
+
+BalancedLogisticRegression
+		Best Params: {'C': 0.0001, 'n_jobs': -1, 'max_iter': 200, 'class_weight': 'balanced'}
+		Fitting fold 1/5
+			accuracy on train: 0.9327245939834167
+			f1 on train: 0.6649603276170974
+			accuracy on test: 0.9335983005550607
+			precision on test: 0.5529279279279279
+			recall on test: 0.8487467588591184
+			f1 on test: 0.6696215479031709
+
+		Fitting fold 2/5
+			accuracy on train: 0.9317823614061537
+			f1 on train: 0.6615096905814349
+			accuracy on test: 0.9329815665044885
+			precision on test: 0.5492028587135789
+			recall on test: 0.8634399308556612
+			f1 on test: 0.6713709677419354
+
+		Fitting fold 3/5
+			accuracy on train: 0.9335297745494415
+			f1 on train: 0.6682626538987688
+			accuracy on test: 0.9316110463921058
+			precision on test: 0.544839255499154
+			recall on test: 0.8349178910976663
+			f1 on test: 0.6593856655290102
+
+		Fitting fold 4/5
+			accuracy on train: 0.9337867470705132
+			f1 on train: 0.6691774373020628
+			accuracy on test: 0.9296237922291509
+			precision on test: 0.5359911406423035
+			recall on test: 0.8366464995678479
+			f1 on test: 0.6533918326020925
+
+		Fitting fold 5/5
+			accuracy on train: 0.9327588569862263
+			f1 on train: 0.6661563323977205
+			accuracy on test: 0.9364763927910642
+			precision on test: 0.567551622418879
+			recall on test: 0.8321799307958477
+			f1 on test: 0.6748509294984215
+
+MLPClassifier
+		Best Params: {'solver': 'sgd', 'hidden_layer_sizes': (200, 200), 'alpha': 1, 'activation': 'tanh', 'early_stopping': True, 'max_iter': 500}
+		Fitting fold 1/5
+			accuracy on train: 0.9587987391214966
+			f1 on train: 0.7154856264048267
+			accuracy on test: 0.9610772288083328
+			precision on test: 0.8058151609553479
+			recall on test: 0.6707000864304236
+			f1 on test: 0.7320754716981133
+
+		Fitting fold 2/5
+			accuracy on train: 0.9607517302816418
+			f1 on train: 0.7251349730053989
+			accuracy on test: 0.9572397724936613
+			precision on test: 0.7971014492753623
+			recall on test: 0.6179775280898876
+			f1 on test: 0.6962025316455697
+
+		Fitting fold 3/5
+			accuracy on train: 0.9598094977043788
+			f1 on train: 0.7161181026137463
+			accuracy on test: 0.9610087028027137
+			precision on test: 0.8188720173535792
+			recall on test: 0.6525496974935178
+			f1 on test: 0.7263107263107264
+
+		Fitting fold 4/5
+			accuracy on train: 0.960186390735284
+			f1 on train: 0.7205387205387205
+			accuracy on test: 0.9598437607071884
+			precision on test: 0.8073196986006459
+			recall on test: 0.648228176318064
+			f1 on test: 0.7190795781399808
+
+		Fitting fold 5/5
+			accuracy on train: 0.960032207222641
+			f1 on train: 0.7212331222368265
+			accuracy on test: 0.9586788186116632
+			precision on test: 0.791974656810982
+			recall on test: 0.6487889273356401
+			f1 on test: 0.7132667617689015
+\end{verbatim}
