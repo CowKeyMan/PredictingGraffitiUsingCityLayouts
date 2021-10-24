@@ -1,3 +1,9 @@
+---
+layout: default
+title: Introduction
+description: Introduction page
+---
+
 ## Predicting Graffiti using City Layouts
 
 ### What do we do?
@@ -19,19 +25,3 @@ The Open Data Portal of the city of Vancouver will be used in this project. [Lin
 ### Who can use this?
 
 While the studied location of this project is Vancouver, this work will be publicly available. Hence, other officials from all over the globe may also view it. Therefore, it may prompt a new way of dealing with graffiti before it occurs.
-
-
-### How is the result?
-
-- The method and the result is going to be in here.
-
-<img width="439" alt="Screen Shot 2021-10-10 at 8 08 46 PM" src="https://user-images.githubusercontent.com/4567991/136697170-44657546-e939-42f1-b24a-4b53177a7324.png">
-
-
-
----
-title: Testing
-layout: template
-filename: testing.md
---- 
-
