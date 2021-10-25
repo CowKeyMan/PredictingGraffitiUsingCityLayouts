@@ -53,7 +53,7 @@ buildings.plot(
     edgecolor=buildings_colour,
     antialiased=True,
     column='graffiti_count',
-    legend=True,
+#     legend=True,
     cmap=cmap,
 )
 
