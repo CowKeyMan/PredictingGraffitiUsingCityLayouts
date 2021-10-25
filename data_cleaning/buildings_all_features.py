@@ -15,7 +15,7 @@ df_streets = pd.read_csv(
 )
 df_geo_local_area = pd.read_csv(
     'resources/data/generated/geo_local_area_details.csv'
-)
+).drop(columns=['Geom'])
 
 df_building = df_building.merge(df_streets, on='street')
 df_building = df_building.merge(df_geo_local_area, on='geo_local_area')

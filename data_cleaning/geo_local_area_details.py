@@ -21,7 +21,7 @@ df_area['geo_local_area_area_m2'] = df_area.apply(
     axis=1
 )
 df_area['geo_local_area'] = df_area['Name']
-df_area = df_area[['geo_local_area', 'geo_local_area_area_m2']]
+df_area = df_area[['geo_local_area', 'geo_local_area_area_m2', 'Geom']]
 
 df_pop = pd.read_csv('resources/data/original/census2016.csv')
 df_pop = df_pop.iloc[0, 2:24]
