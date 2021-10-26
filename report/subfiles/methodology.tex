@@ -23,3 +23,10 @@ Finally, everything is joined together. Any Vancouver specific feature is remove
 For our purposes, we train both regression and classification models. The target value for regression is the graffiti count for each building, while for classification we predict whether a building has or does not have graffiti on it. For each model that we build, the pipeline is the same. We first perform scaling and then perform hyper parameter tuning on a randomly selected 5000 samples of our dataset. With regards to scaling, we scaled the continuous variables to mean 0 and standard deviation 1. Next, we split the full dataset into five folds and perform cross validation. A scaler is first fit on the train set, then we train the model, then the scaler is applied to the testing set, and lastly we pass the testing set through our model. For the full model parameters which we tried, refer to Appendix~\ref{app:model_parameters}.
 
 The results shown in the web page are the averages of the results obtained by our models. For the full results tables, refer to Appendix~\ref{app:full_results}. When it comes to explaining our models, however, we train separate linear models on our entire dataset. We then put the entire dataset back into the model to get the predictions based on the fitted parameters. Linear models were chosen for this task to minimize the risk of overfitting. These predictions were then used to generate heatmaps of the anticipated locations where new graffiti will appear.
+
+\section{Presenting Results}
+% how we will be showing stuff to user
+% results + discussion (when we point out a result we also discuss it to show what it means)
+  % correlation
+  % FN vs FP models (which to prioritize? This might depend on the government body at hand)
+  % Predict where new graffiti will be
