@@ -14,7 +14,7 @@ buildings_colour = colours[7]
 
 argparser = argparse.ArgumentParser(conflict_handler='resolve')
 argparser.add_argument(
-    "-w", "--width", required=False, default=300, type=int
+    "-w", "--width", required=False, default=100, type=int
 )
 args = vars(argparser.parse_known_args()[0])
 width_inches = args['width']
@@ -50,7 +50,6 @@ vancouver.plot(
 buildings = buildings.sort_values('graffiti_count')
 buildings.plot(
     ax=ax,
-    edgecolor=buildings_colour,
     antialiased=True,
     column='graffiti_count',
 #     legend=True,
