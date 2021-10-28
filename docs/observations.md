@@ -37,6 +37,7 @@ Similarly to local areas, we do not focus on individual streets, but we do consi
 
 Our models also take other building properties into account, such as the height, area and the type of roof that a building has. From the below visualisation, we can see that although there are many more pitched roof types, there is a higher chance for a building with a flat roof to be vandalized than any other type of building.
 ![Roof Type](https://user-images.githubusercontent.com/4567991/139188208-2b56689a-ecc5-4abd-898e-34afb751dd13.jpeg)
+
 <p align="center">
     Fig. 6. Roof types with and without graffiti in the building.
 </p>
