@@ -86,7 +86,6 @@ As can be seen, the neural network is not drastically more accurate than the bas
 The following confusion matrix shows the averages of how the logistic regression model classifies the test set.
 
 ![Logistic Regression Confusion Matrix](/assets/images/logistic_regression_confusion_matrix.png)
-<img src="/assets/images/logistic_regression_confusion_matrix.png" class="align-left" alt="">
 <p align="center">
     Fig. 3.7. Logistic Regression confusion matrix.
 </p>
@@ -134,8 +133,7 @@ If we were to use this model for predicting which buildings are going to have gr
 
 In the case of Logistic Regression with the balanced weights, the confusion matrix looks quite different.
 
-<p align="center">![Balanced Logistic Regression Confusion Matrix](/assets/images/balanced_logistic_regression_confusion_matrix.png)</p>
-<img src="/assets/images/balanced_logistic_regression_confusion_matrix.png" class="align-center" alt="">
+![Balanced Logistic Regression Confusion Matrix](/assets/images/balanced_logistic_regression_confusion_matrix.png)
 <p align="center">
     Fig. 3.11. Balanced Logistic Regression confusion matrix.
 </p>
