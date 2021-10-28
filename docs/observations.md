@@ -22,10 +22,11 @@ We will also be taking street data into account. A huge portion of all graffiti 
 
 Similarly to local areas, we do not focus on individual streets, but we do consider street details, specifically the type of street. From the next visualisation we can see that, while there are many more residential roads, if a building lies in an arterial street, then it has a much higher chance of being vandalized.
 
-{pie and bar charts for streets}
+![Street Type](https://user-images.githubusercontent.com/4567991/139188218-9a0d91a2-72fa-4cf6-8c93-282cfe598bd1.jpeg)
+
 
 Our models also take other building properties into account, such as the height, area and the type of roof that a building has. From the below visualisation, we can see that although there are many more pitched roof types, there is a higher chance for a building with a flat roof to be vandalized than any other type of building.
+![Roof Type](https://user-images.githubusercontent.com/4567991/139188208-2b56689a-ecc5-4abd-898e-34afb751dd13.jpeg)
 
-{pie and bar charts for roof types}
 
 [back](./)
