@@ -27,6 +27,7 @@ We use the Linear Regression to highlight explain the most contributing features
 |two\_houses\_away\_buildings\_average\_sub\_buildings|-0.04567|
 |one\_house\_away\_buildings\_average\_height|-0.03249|
 |one\_house\_away\_buildings\_count|-0.02273|
+
 <p align="center">
     Fig. 3.2. Features which our model have found to deter graffiti.
 </p>
