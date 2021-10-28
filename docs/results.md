@@ -6,20 +6,20 @@ description: This is results page
 
 # Results
 
-In this chapter, we discuss the results obtained by our machine learning models. For our purposes, we considered two tasks to solve. The first is a regression problem, where we try to predict the actual number of graffiti that will be on each building. The second problem is classification, where we predict whether a building will be vandalized with graffiti or not.
+In this chapter, we discuss the results obtained by our machine learning models. For our purposes, we consider two tasks to solve. The first is a regression problem, where we the task is to predict the actual number of graffiti that will be on each building. The second problem is classification, where the goal is to predict whether a building will be vandalized with graffiti or not.
 
 ## Regression
 
-In this section, we will be considering the problem of regression. We trained several models to see which types fit this problem better. This also allows us to see the relationships between the different features better. The two that stood out were the Linear Regression models and the Neural Network model. Below is the original graffiti regression heatmap, shown previously in the observations:
+In this section, we will be considering the problem of regression. Several models are trained to see which ones fit this problem better. This also has the advantage of allowing us to study the relationships between the different features better. The two that stood out were the Linear Regression and the Neural Network models. Below is the original graffiti regression heatmap, shown previously in the observations:
 
 ![Graffiti on buildings heatmap](/assets/images/original_graffiti_heatmap.png)
 <p align="center">
     Fig. 3.1. A heatmap of the existing graffiti on each building in Vancouver.
 </p>
 
-While the Linear Regression gave an R^2 score of 0.60 on the test set, the Neural Network gave a score of 0.62. However, these include the buildings with 0 graffiti. If we remove these and only consider the ones with graffiti, the R^2 of Linear Regression is 0.38, while that of the Neural Network is 0.41. This means that if we were to use these models on another city, we would choose the Neural Network. Fortunately for us, Linear Regression is not so far behind in terms of score, hence we can use to to explain and highlight the important features which contribute to a building being more or less vandalized.
+While the Linear Regression gave an R^2 score of 0.60 on the test set, the Neural Network gave a score of 0.62. However, these include the buildings with 0 graffiti. If we remove these and only consider the vandalized buildings, the R^2 of Linear Regression is 0.38, while that of the Neural Network is 0.41. This means that if we were to use these models on another city, we would choose the Neural Network. Fortunately for us, Linear Regression is not so far behind in terms of the score, hence we can use it to explain and highlight important features which contribute to a building being more or less vandalized.
 
-We use the Linear Regression to highlight explain the most contributing features because it is much easier to explain than the Neural Network. These are shown in the following two tables, alongside their importance. The first table shows features which our model have found to deter graffiti. The less the coefficient, the more they deter. The second table shows which features were found to increase the chances of a building to be vandalized. The higher the absolute value of the coefficient, the higher the importance of the feature.
+We use the Linear Regression to highlight and explain the most contributing features, because it is much more interpretable than a Neural Network. These are shown in the following two tables, alongside their importance. The first table shows features which our model have found to deter graffiti. The less the coefficient, the more they deter. The second table shows which features were found to increase the chances of a building to be vandalized. The higher the coefficient, the more it encourages graffiti. In general, the higher the absolute value of the coefficient, the higher the importance of the feature.
 
 |**Feature**|**Coefficient**|
 |pop\_density|-7.68047|
@@ -29,10 +29,10 @@ We use the Linear Regression to highlight explain the most contributing features
 |one\_house\_away\_buildings\_count|-0.02273|
 
 <p align="center">
-    Fig. 3.2. Features which our model have found to deter graffiti.
+    Fig. 3.2. Features which our model has found to deter graffiti.
 </p>
 
-This tables tells us that the higher the population in an area, the less chance of graffiti. Furthermore, buildings on a residential street are less likely to be vandalized. Furthermore, areas which are more dense also have an advantage over sparser areas. Lastly, tall buildings in the vicinity of a building were found to also contribute to deterring graffiti.
+This tables tells us that the higher the population in an area, the less chance of graffiti. Furthermore, buildings on a residential street are less likely to be vandalized. Additionally, areas which are more dense have an advantage over sparser areas. Lastly, tall buildings in the vicinity of a building were found to also contribute towards the deterrence of graffiti.
 
 |**Feature**|**Coefficient**|
 |one\_house\_away\_graffiti\_average|0.46045|
@@ -42,12 +42,12 @@ This tables tells us that the higher the population in an area, the less chance 
 |roof\_type\_Flat|0.09962|
 
 <p align="center">
-    Fig. 3.3. The chances of a building to be vandalized
+    Fig. 3.3. Features which our model has found to increase the likelihood of graffiti.
 </p>
 
 From this table we learn that more graffiti in the vicinity of a building will increase the chances of that building having graffiti. Buildings on arterial streets and those with flat roof types will also have a higher chance of being vandalized.
 
-As a result of these tables, we learn that, when planning cities, we should have more dense areas, and less buildings with very few people next to them. Our hypothesis for this is that if there are more people in an area, there are consequently more eyes protecting it from vandalism. We also learn that graffiti spreads similar to a virus. Hence, in cleanup operations, buildings at the edge of the 'infected' area should be dealt with first, because buildings at the heart of the area have a higher chance of having graffiti put on them again. Furthermore, we should avoid building on arterial roads. Lastly, since buildings with a flat roof type attract more graffiti, we should invest in higher quality and more elaborate buildings, rather than plain ones. In the long run, this will be more cost effective since there will not be any need to cleanup.
+From the information given to us in these tables, we learn that, when planning cities, we should have more dense areas, and less buildings with very few people next to them. Our hypothesis for this is that if there are more people in an area, there are consequently more eyes protecting it from vandalism. We also learn that graffiti spreads similar to a virus, that is, one building to the next. Hence, in cleanup operations, buildings at the edge of the 'infected' area should be dealt with first, because buildings at the heart of the area have a higher chance of having graffiti put on them again, since they are surrounded by more 'infected' buildings than ones at the edges. Furthermore, we should avoid building on arterial roads. Lastly, since buildings with a flat roof type attract more graffiti, we should invest in higher quality and more elaborate buildings, rather than plain ones. In the long run, this will be more cost effective since there will not be any need to cleanup.
 
 The following map shows the resulting Vancouver graffiti heatmap if nothing is done. This was generated by fitting a linear regression model on the entire dataset and then putting that same dataset through the same model.
 
@@ -56,7 +56,7 @@ The following map shows the resulting Vancouver graffiti heatmap if nothing is d
     Fig. 3.4. Logistic Regression predicted heatmap.
 </p>
 
-Compared to the original heatmap, we notice that there graffiti in Downtown, Mount Pleasant and the Westend is set to increase, while the southern part of Marpole is trending towards becoming the newest hub for graffiti. Hence, it would be a good idea to target these areas when it comes to enforcement.
+Compared to the original heatmap, we notice that graffiti in Downtown, Mount Pleasant and Westend is set to increase, while the southern part of Marpole is trending towards becoming the newest hub for graffiti. Consequently, it would be a good idea to target these areas when it comes to enforcement.
 
 ## Classification
 
