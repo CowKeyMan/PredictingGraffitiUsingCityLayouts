@@ -69,11 +69,11 @@ Next, we consider the problem of classification, where buildings either have gra
 
 The following table shows the classification metrics for our classification models. It is important to note that the f1-score is more important than accuracy for our case, since we have an imbalanced dataset.
 
--|**Logistic Regression**|**Neural Network**|**Logistic Regression with Balanced Class Weights**|
-accuracy|0.96|0.96|0.93|
-precision|0.92|0.80|0.55|
-recall|0.63|0.65|0.84|
-f1-score|0.71|0.72|0.67|
+|-|**Logistic Regression**|**Neural Network**|**Logistic Regression with Balanced Class Weights**|
+|**accuracy**|0.96|0.96|0.93|
+|**precision**|0.92|0.80|0.55|
+|**recall**|0.63|0.65|0.84|
+|**f1-score**|0.71|0.72|0.67|
 
 <p align="center">
     Fig. 3.6. The classification metrics for our classification models.
