@@ -85,7 +85,7 @@ As can be seen, the neural network is not drastically more accurate than the bas
 
 The following confusion matrix shows the averages of how the logistic regression model classifies the test set.
 
-![Logistic Regression Confusion Matrix](/assets/images/logistic_regression_confusion_matrix.png)
+<p align="center">![Logistic Regression Confusion Matrix](/assets/images/logistic_regression_confusion_matrix.png)</p>
 <p align="center">
     Fig. 3.7. Logistic Regression confusion matrix.
 </p>
@@ -161,7 +161,7 @@ As previously done, we also analyze the most important features for this model.
 |two\_houses\_away\_graffiti\_buildings|0.41469|
 
 <p align="center">
-    Fig. 3.13. The most important features for this model.
+    Fig. 3.13. The most important features for this model with a new feature.
 </p>
 
 Similar to the previous models, the same features contribute to the probability of a building having more or less graffiti. The one interesting new feature is that a high average of nearby sub buildings will decrease the chance of graffiti, while a high median will increase it.
