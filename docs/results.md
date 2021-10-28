@@ -135,6 +135,7 @@ If we were to use this model for predicting which buildings are going to have gr
 In the case of Logistic Regression with the balanced weights, the confusion matrix looks quite different.
 
 <p align="center">![Balanced Logistic Regression Confusion Matrix](/assets/images/balanced_logistic_regression_confusion_matrix.png)</p>
+<img src="/assets/images/balanced_logistic_regression_confusion_matrix.png" class="align-center" alt="">
 <p align="center">
     Fig. 3.11. Balanced Logistic Regression confusion matrix.
 </p>
