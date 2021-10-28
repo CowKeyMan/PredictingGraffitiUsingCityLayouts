@@ -16,7 +16,15 @@ To extract more information from our data, we also included objects which are cl
 
 Leaving the resultant previous dataset on hold, we do some processing on other smaller datasets which will be joined later. First, the \textit{local-area-boundary} and \textit{cencus2016} datasets are joined to obtain the area in meters squared, the population and the population density of each local area are extracted and put into a single dataset. The \textit{public-streets} dataset is also cleaned so that it will give us the type of each street, for example, whether the street is arterial or residential.
 
-Finally, everything is joined together. Any Vancouver specific feature is removed such as local area and street names. The street and roof type features are one-hot encoded so we can build a model out of them. Next, we discuss the pipeline used to build our regression and classification models.
+Finally, everything is joined together. Any Vancouver specific features are removed, such as local area and street names. The street and roof type features are one-hot encoded so we can build a model out of them. The full pipeline can be visualised in Figure~\ref{fig:methodology}. Next, we discuss the pipeline used to build our regression and classification models.
+
+\begin{figure}
+   \centering
+   \includegraphics[width=\textwidth]{images/MethodologyInputOutputDiagram.png}
+   \caption{Input output diagram. Notation: Oval = Original Data, Hexagon = Generated Data, Rectangle = Script, Filled Arrow = Input, Hollow Arrow = Output}
+   \label{fig:methodology}
+\end{figure}
+
 
 \section{Models}
 
