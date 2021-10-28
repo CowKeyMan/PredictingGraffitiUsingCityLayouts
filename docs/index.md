@@ -8,7 +8,7 @@ description: Introduction page
 
 ## The Task
 
-This project will analyse correlation between graffiti and street lighting in Vancouver, CA. Cleaning costs for graffiti can be a large expense in a big city and reducing it is in the interest of the city council of Vancouver as well as private companies. Therefore, we will be aiding governments to allocate efficient and effective budgets with regards to managing graffiti around their cities.
+This project will analyse what properties of a city correlates with graffiti generation in Vancouver, CA. Cleaning costs for graffiti can be a large expense in a big city and reducing it is in the interest of the city council of Vancouver as well as private companies. Therefore, we will be aiding governments to allocate efficient and effective budgets with regards to managing graffiti around their cities.
 
 ## Necessity
 
@@ -17,7 +17,7 @@ In July 2021, Vancouver city spend [half a million dollars on graffiti removal](
 
 ## The Goal
 
-The aim of this project is to help predict graffiti based on features of the city, making it easier to focus cleaning efforts. This project will help the city council of Vancouver to improve livelihoods of their citizens by having a cleaner environment. Moreover, the data will be used to prevent further graffiti by suggesting city layout changes or increased enforcement in select areas, where needed. It will help the city council of Vancouver to act earlier and more precisely if there is a potential for other graffiti to appear in some area. The project will also be able to identify which common features of cities prevent or encourage graffiti to be put there in the first place.
+The aim of this project is to help predict graffiti based on features of the city, making it easier to focus cleaning efforts. We will be focus on individual buildings, and using the provided data on how much graffiti each building has, we will be able to identify features which led to the building being clean or vandalized. This project will help the city council of Vancouver to improve livelihoods of their citizens by having a cleaner home. Moreover, the data will be used to prevent further graffiti by suggesting city layout changes or increased enforcement in select areas where this is needed. It will help the city council of Vancouver to act earlier and more precisely if there is a potential for other graffiti to appear in some areas. The project will also be able to identify which common features of cities prevent or encourage graffiti to be put there in the first place.
 
 ## Data Sources
 
