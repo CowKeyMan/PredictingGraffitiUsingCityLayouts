@@ -40,6 +40,7 @@ This tables tells us that the higher the population in an area, the less chance 
 |two\_houses\_away\_graffiti\_average|0.27223|
 |street\_type\_arterial|0.16828|
 |roof\_type\_Flat|0.09962|
+
 <p align="center">
     Fig. 3.3. The chances of a building to be vandalized
 </p>
@@ -73,6 +74,7 @@ accuracy|0.96|0.96|0.93|
 precision|0.92|0.80|0.55|
 recall|0.63|0.65|0.84|
 f1-score|0.71|0.72|0.67|
+
 <p align="center">
     Fig. 3.6. The classification metrics for our classification models.
 </p>
@@ -98,6 +100,7 @@ To predict, The most important features for this model are listed in the followi
 |one\_house\_away\_graffiti\_count|-0.31271|
 |four\_houses\_away\_buildings\_average\_height|-0.29376|
 |one\_house\_away\_buildings\_average\_height|-0.28481|
+
 <p align="center">
     Fig. 3.8. Features which prevent graffiti from being put on a building
 </p>
@@ -110,6 +113,7 @@ From the above, we see that more nearby buildings will prevent graffiti. Further
 |one\_house\_away\_buildings\_median\_height|0.38123|
 |one\_house\_away\_graffiti\_average|0.34206|
 |four\_houses\_away\_graffiti\_average|0.28826|
+
 <p align="center">
     Fig. 3.9. Features which encourage more graffiti.
 </p>
@@ -122,7 +126,7 @@ If we were to use this model for predicting which buildings are going to have gr
 
 ![Logistic Regression Prediction Heatmap](/assets/images/logistic_regression_heatmap.png)
 <p align="center">
-    Fig. 3.10. Logistic Regression prediction heatmap
+    Fig. 3.10. Logistic Regression prediction heatmap.
 </p>
 
 ### Logistic Regression with Balanced Weights
@@ -144,6 +148,7 @@ As previously done, we also analyze the most important features for this model.
 |one\_house\_away\_buildings\_count|-0.51494|
 |four\_houses\_away\_buildings\_average\_height|-0.43637|
 |one\_house\_away\_graffiti\_count|-0.32885|
+
 <p align="center">
     Fig. 3.12. The most important features for this model.
 </p>
@@ -154,6 +159,7 @@ As previously done, we also analyze the most important features for this model.
 |one\_house\_away\_buildings\_median\_sub\_buildings|0.70437|
 |four\_houses\_away\_graffiti\_average|0.47396|
 |two\_houses\_away\_graffiti\_buildings|0.41469|
+
 <p align="center">
     Fig. 3.13. The most important features for this model.
 </p>
