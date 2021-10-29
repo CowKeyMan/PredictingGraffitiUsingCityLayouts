@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Statistics
+title: Additional Statistics
 description: This is an additional statistics page
 ---
 
