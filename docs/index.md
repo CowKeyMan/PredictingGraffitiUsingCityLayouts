@@ -5,8 +5,6 @@ description: Introduction page
 nav_order: 1
 ---
 
- <link rel="shortcut icon" type="image/x-icon" href="test.png">
-
 # Predicting Graffiti using City Layouts
 
 ## The Task
