@@ -22,8 +22,8 @@ The aim of this project is to help predict graffiti based on features of the cit
 
 ## Data Sources
 
-The [Open Data Portal](https://opendata.vancouver.ca/) of the City of Vancouver will be used in this project.
+Data from the [Open Data Portal](https://opendata.vancouver.ca/) of the City of Vancouver will be used in this project.
 
 ## Target Audience
 
-While the studied location of this project is Vancouver, this work will be publicly available. Hence, other officials from all over the globe may also view it. Therefore, it may prompt a new way of dealing with graffiti before it occurs. Furthermore, city planners may use it to design cities which are graffiti proof by design. Lastly, we will also be leaving some small technical details in the report, to inspire other researchers to explore this area further. For the methodology, other researchers can check out the latex report on [github](https://github.com/CowKeyMan/PredictingGraffitiUsingCityLayouts).
+This project is primarely aimed at the City Council of Vancouver, as we chose Vancouver as the location for our study. The final work will be publicly available for other officials from all over the globe to learn from. We hope this reserach may prompt a new way of dealing with graffiti before it occurs. For example, city planners may use the information to design graffiti proof cities and mitigate or solve current graffiti related problems. Technical details about the methodology can be found in our report on [github](https://github.com/CowKeyMan/PredictingGraffitiUsingCityLayouts), with the hopes of inspiring other researchers to explore this area further.
