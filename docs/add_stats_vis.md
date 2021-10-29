@@ -1,10 +1,10 @@
 ---
 layout: default
-title: Stats and Visualization
+title: Statsistics
 description: This is additional statistics and visualization page
 ---
 
-# Additional Statistics and Visualization
+# Additional Statistics
 
 ## Full Feature-Coefficients Table - Linear Regression
 
