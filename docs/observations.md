@@ -7,7 +7,7 @@ nav_order: 2
 
 # Observations
 
-Of the total 72965 studided buildings, 5784 (8.61%) of them are vandalized, while the remaining 67181 are free of graffiti. Each building can contain more than one act of vandalism. The following is a heatmap of the existing graffiti on each building in Vancouver, where darker colours indicate more graffiti on a particular building:
+Of the total 72965 studied buildings, 5784 (8.61%) of them are vandalized, while the remaining 67181 are free of graffiti. Each building can contain more than one act of vandalism. The following is a heatmap of the existing graffiti on each building in Vancouver, where darker colours indicate more graffiti on a particular building:
 
 ![Graffiti on buildings heatmap](/assets/images/original_graffiti_heatmap.png)
 <p align="center">
@@ -19,7 +19,7 @@ If we study the buildings with graffiti on them, we see that there is an exponen
 <p align="center">
     Fig. 2.2. Graffiti distribution of vandalized buildings.
 </p>
-Most of the graffiti is located at the north east area of Vancouver, namely in Downtown, Strathcona, Grandview-Woodland and Mount Pleasant. While we do not focus on the local area itself, our results do consider certain characteristics of each area, such as the population and the physical area.
+Most of the graffiti is located at the North East area of Vancouver, namely in Downtown, Strathcona, Grandview-Woodland and Mount Pleasant. While we do not focus on the local area itself, our results do consider certain characteristics of each area, such as the population and the physical area.
 
 ![Map of counts of graffiti buildings on each local area](/assets/images/local_area_graffiti_heatmap.png)
 <p align="center">
