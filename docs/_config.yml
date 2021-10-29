@@ -5,3 +5,4 @@ title: Predicting Graffiti using City Layouts
 #plugins:
 #- jekyll-remote-theme
 logo: "test.png"
+search_enabled: true
