@@ -4,5 +4,14 @@ title: Predicting Graffiti using City Layouts
 #remote_theme: pages-themes/cayman@v0.2.0
 #plugins:
 #- jekyll-remote-theme
-logo: "test.png"
 search_enabled: true
+aux_links:
+  "Predicting Graffiti Using City Layouts on GitHub":
+    - "https://github.com/CowKeyMan/PredictingGraffitiUsingCityLayouts"
+    
+    
+# Back to top link
+back_to_top: true
+back_to_top_text: "Back to top"
+
+aux_links_new_tab: true
