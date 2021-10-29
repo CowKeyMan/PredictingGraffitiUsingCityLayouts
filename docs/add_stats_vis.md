@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Statistics
-description: This is additional statistics and visualization page
+description: This is an additional statistics page
 ---
 
 # Additional Statistics
@@ -52,6 +52,9 @@ description: This is additional statistics and visualization page
 |area\_m2|0.00|
 |geo\_local\_area\_area\_m2|-0.00|
 |geo\_local\_area\_population|0.00|
+<p align="center">
+    Fig. 4.1. Full Feature-Coefficients Table - Linear Regression.
+</p>
 
 ## Full Feature-Coefficients Table - Logistic Regression
 
@@ -99,6 +102,9 @@ description: This is additional statistics and visualization page
 |roof\_type\_Complex|-0.01765|
 |area\_m2|0.01598|
 |pop\_density|-0.00102|
+<p align="center">
+    Fig. 4.2. Full Feature-Coefficients Table - Logistic Regression.
+</p>
 
 ## Full Feature-Coefficients Table - Logistic Regression with Balanced Weights
 
@@ -146,5 +152,7 @@ description: This is additional statistics and visualization page
 |street\_type\_secondary\_arterial|-0.01484|
 |pop\_density|-0.01256|
 |two\_houses\_away\_buildings\_median\_sub\_buildings|0.00350|
-
+<p align="center">
+    Fig. 4.3. Full Feature-Coefficients Table - Logistic Regression with Balanced Weights.
+</p>
 [back](./)
