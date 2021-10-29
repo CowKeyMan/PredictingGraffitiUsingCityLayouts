@@ -2,6 +2,7 @@
 layout: default
 title: Introduction
 description: Introduction page
+nav_order: 1
 ---
 
 # Predicting Graffiti using City Layouts

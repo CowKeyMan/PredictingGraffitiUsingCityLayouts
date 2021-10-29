@@ -1,7 +1,8 @@
 ---
 layout: default
-title: Statistics
+title: Additional Statistics
 description: This is an additional statistics page
+nav_order: 4
 ---
 
 # Additional Statistics
