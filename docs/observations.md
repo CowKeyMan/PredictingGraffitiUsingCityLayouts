@@ -2,6 +2,7 @@
 layout: default
 title: Observations
 description: Observations on current data
+nav_order: 2
 ---
 
 # Observations
