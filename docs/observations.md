@@ -25,7 +25,7 @@ Most of the graffiti is located in the North East area of Vancouver, namely in D
 <p align="center">
     Fig. 2.3. Counts of graffiti buildings in each local area.
 </p>
-We will also be taking street data into account. A huge portion of all graffiti can be found on major streets. In the picture below, the top 10 most graffitied streets contain almost 50% of all graffiti in Vancouver. Most vandalized buildings are on Main Street, East Hastings Street, and Kingsway. These three streets alone contain a quarter of the reported graffiti.
+We will also be taking street data into account. A huge portion of all graffiti can be found on major streets. In the figure below, the top 10 most graffitied streets contain almost 50% of all graffiti in Vancouver. Most vandalized buildings are on Main Street, East Hastings Street, and Kingsway. These three streets alone contain a quarter of the reported graffiti.
 
 ![Map of 10 most graffitied streets](/assets/images/vancouver_streetopt2.png)
 <p align="center">
@@ -38,7 +38,7 @@ Similar to local areas, we do not focus on individual streets, but we do conside
     Fig. 2.5. Street types with and without graffiti on the building.
 </p>
 
-Our models also take other building properties into accounts, such as the height, area, and roof type. From the below visualisation, we can see that although there are many more pitched roof types, there is a higher chance for a building with a flat roof to be vandalized than any other type of building.
+Our models also take other building properties into account, such as the height, area, and roof type. From the below visualisation, we can see that although there are many more pitched roof types, there is a higher chance for a building with a flat roof to be vandalized than any other type of building.
 ![Roof Type](https://user-images.githubusercontent.com/4567991/139188208-2b56689a-ecc5-4abd-898e-34afb751dd13.jpeg)
 
 <p align="center">
