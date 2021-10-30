@@ -7,20 +7,20 @@ nav_order: 3
 
 # Results
 
-In this chapter, we discuss the results obtained by our machine learning models. For our purposes, we consider two tasks to solve. The first is a regression problem, where the task is to predict the actual number of graffiti that will be defacing building. The second problem is classification, where the goal is to predict whether a building will be vandalized with graffiti or not.
+In this chapter, we discuss the results obtained by our machine learning models. For our purposes, we consider two tasks to solve. The first is a regression problem, where the task is to predict the actual number of graffiti defacing building. The second problem is classification, where the goal is to predict whether a building will be vandalized with graffiti or not.
 
 ## Regression
 
-In this section, we consider the problem of regression. Several models are trained to see which ones fit this problem better. This also has the advantage of allowing us to study the relationships between the features better. The two models that stood out were the Linear Regression and the Neural Network models. Below is the original graffiti regression heatmap, shown previously in the observations:
+In this section, we consider the problem of regression. Several models are trained to see which ones fit this problem better. The regression also has the advantage of allowing us to study the relationships between the features better. The two models that stood out were the Linear Regression and the Neural Network models. Below is the original graffiti regression heatmap, shown previously in the observations:
 
 ![Graffiti on buildings heatmap](/assets/images/original_graffiti_heatmap.png)
 <p align="center">
     Fig. 3.1. A heatmap of the existing graffiti on each building in Vancouver.
 </p>
 
-While the Linear Regression gave an R<sup>2</sup> score of 0.60 on the test set, the Neural Network gave a score of 0.62. However, these include the buildings with 0 graffiti. If we remove these and only consider the vandalized buildings, the R<sup>2</sup> of Linear Regression is 0.38, while that of the Neural Network is 0.41. This means that if we were to use these models on another city, we would choose the Neural Network. Fortunately for us, Linear Regression is not so far behind in terms of the score, hence we can use it to explain and highlight the important features which contribute to a building being more or less vandalized.
+While the Linear Regression gave an R<sup>2</sup> score of 0.60 on the test set, the Neural Network gave a score of 0.62. However, these include the buildings with 0 graffiti. If we remove these and only consider the vandalized buildings, the R<sup>2</sup> of Linear Regression is 0.38, while the Neural Network is 0.41. If we were to use these models in another city, we would choose the Neural Network. Fortunately for us, Linear Regression is not so far behind in terms of the score; hence we can use it to explain and highlight the important features which contribute to a building being more or less vandalized.
 
-We use the Linear Regression to highlight and explain the most contributing features, because it is much more interpretable than a Neural Network. These features are shown in the following two tables, alongside their importance. The first table shows features which our model has found to deter graffiti. The lower the coefficient, the more they deter. The second table shows which features were found to increase the chances of a building to be vandalized. The higher the coefficient, the more it encourages graffiti. In general, higher absolute value of the coefficient indicates higher importance of the feature. To see the full feature-coefficient table for this model and other models, you may check out our [additional statistics page](add_stats_vis.md).
+We use the Linear Regression to highlight and explain the most contributing features because it is more interpretable than a Neural Network. These features are shown in the following two tables, alongside their importance. The first table shows features which our model has found to deter graffiti. The lower the coefficient, the more they deter. The second table shows which features were found to increase the chances of a building being vandalized. The higher the coefficient, the more it encourages graffiti. In general, a higher absolute value of the coefficient indicates higher importance of the feature. To see the full feature-coefficient table for this model and other models, you may check out our [additional statistics page](add_stats_vis.md).
 
 |**Feature**|**Coefficient**|
 |pop\_density|-7.68047|
@@ -33,7 +33,7 @@ We use the Linear Regression to highlight and explain the most contributing feat
     Fig. 3.2. Features which our model has found to deter graffiti.
 </p>
 
-This tables tells us that the higher the population in an area, the less chance of graffiti. Furthermore, buildings on a residential street are less likely to be vandalized. Additionally, areas which are more dense have an advantage over sparser areas. Higher building density would decrease the probability of an individual building having graffiti. Lastly, tall buildings in the vicinity of a building were also found to deter of graffiti.
+These tables tell us that the higher the population in an area, the less chance of graffiti. Furthermore, buildings on a residential street are less likely to be vandalized. Additionally, more dense areas have an advantage over sparser areas. Higher building density would decrease the probability of an individual building having graffiti. Lastly, tall buildings in the vicinity of a building were also found to deter graffiti.
 
 |**Feature**|**Coefficient**|
 |one\_house\_away\_graffiti\_average|0.46045|
@@ -46,9 +46,11 @@ This tables tells us that the higher the population in an area, the less chance 
     Fig. 3.3. Features which our model has found to increase the likelihood of graffiti.
 </p>
 
-From this table we learn that more graffiti in the vicinity of a building will increase the chances of that building having graffiti. Buildings on arterial streets and those with flat roof types will also have a higher chance of being vandalized, as was hypothesized in our observations.
+From this table, we learn that more graffiti in the vicinity of a building will increase the chances of that building having graffiti. Buildings on arterial streets and flat roof types will also have a higher chance of being vandalized, as hypothesized in our observations.
 
-From the information given to us in these tables, we learn that, when planning cities, we should have more dense areas, and less buildings with very few people next to them. Our hypothesis for this is that if there are more people in an area, there are consequently more eyes protecting it from vandalism. We also learn that graffiti spreads similar to a virus, that is, from one building to the next. Hence, in cleanup operations, buildings at the edge of the 'infected' area should be dealt with first, because buildings at the heart of the area have a higher chance of having graffiti put on them again, since they are surrounded by more 'infected' buildings than ones at the edges. This could also be explained by people having less hesitation to paint on buildings with existing graffiti than on clean buildings or in a area with less graffiti. Cleaning present graffiti would then prove to be the most effective preventative measure. Furthermore, we should avoid building on arterial roads or at least invest additional resource for graffiti prevention. Our hypothesis being that arterial streets have lots of traffic and thus onlookers for the graffiti in case the perpetrator wishes to present a message. Arterial roads are also key avenues of movement and easily accessible, possibly increasing the risk of graffiti. Lastly, since buildings with a flat roof type attract more graffiti, we should invest in higher quality and more elaborate buildings, rather than plain ones. In the long run, this will be more cost effective since there will not be any need for cleanups.
+From the information in these tables, we learn that, when planning cities, we should have more dense areas and fewer buildings with very few people next to them. Our hypothesis is that if there are more people in an area, there are consequently more eyes protecting it from vandalism. We also learn that graffiti spreads similar to a virus, that is, from one building to the next. Hence, in cleanup operations, buildings at the edge of the 'infected' area should be dealt with first, because buildings at the heart of the area have a higher chance of having graffiti put on them again, since they are surrounded by more 'infected' buildings than ones at the edges. This could also be explained by people having less hesitation to paint on buildings with existing graffiti than on clean buildings or in an area with less graffiti. Cleaning present graffiti would then prove to be the most effective preventative measure. 
+
+Furthermore, we should avoid building on arterial roads or at least invest additional resources for graffiti prevention. We hypothesise that arterial streets have lots of traffic and thus onlookers for the graffiti in case the perpetrator wishes to present a message. Arterial roads are also key avenues of movement and easily accessible, possibly increasing the risk of graffiti. Lastly, since buildings with a flat roof type attract more graffiti, we should invest in higher quality and more elaborate buildings rather than plain ones. This will be more cost-effective since there will not be any need for cleanups in the long run.
 
 The following map shows the resulting Vancouver graffiti heatmap if nothing is done. This was generated by fitting a linear regression model on the entire dataset and then putting that same dataset through the model.
 
@@ -57,11 +59,11 @@ The following map shows the resulting Vancouver graffiti heatmap if nothing is d
     Fig. 3.4. Logistic Regression predicted heatmap.
 </p>
 
-Compared to the original heatmap, we notice that graffiti in Downtown, Mount Pleasant and Westend is set to increase, while the southern part of Marpole is trending towards becoming the newest hub for graffiti. Consequently, it would be a good idea to target these areas when it comes to allocating enforcement.
+Compared to the original heatmap, we notice that graffiti in Downtown, Mount Pleasant, and Westend is set to increase, while the southern part of Marpole is trending towards becoming the newest hub for graffiti. Consequently, it would be a good idea to target these areas when it comes to allocating enforcement.
 
 ## Classification
 
-Next, we consider the problem of classification, where buildings either have graffiti or they do not. This means that we are not concerned with the amount of graffiti the building contains, just if it is clean or if it has been vandalized. The following map indicates buildings with graffiti on them in red.
+Next, we consider the problem of classification, where buildings either have graffiti or do not. This means that we are not concerned with the amount of graffiti the building contains, just if it is clean or if it has been vandalized. The following map indicates buildings with graffiti on them in red.
 
 ![Original Classification Heatmap](/assets/images/graffiti_classification_map.png)
 <p align="center">
@@ -80,7 +82,7 @@ The following table shows the classification metrics for our classification mode
     Fig. 3.6. The classification metrics for our classification models.
 </p>
 
-As can be seen, the neural network is not drastically more accurate than the basic logistic regression model. Thus, we can use the logistic regression models to explain our data and provide suggestions to mitigate graffiti. We will look at both the normal Logistic Regression models and the one trained with balanced class weights.
+As can be seen, the neural network is not drastically more accurate than the basic logistic regression model. Thus, we can use the logistic regression models to explain our data and suggest mitigating graffiti. We will look at both the normal Logistic Regression models and the one trained with balanced class weights.
 
 ### Logistic Regression
 
@@ -91,9 +93,9 @@ The following confusion matrix shows the averages of how the logistic regression
     Fig. 3.7. Logistic Regression confusion matrix.
 </p>
 
-Here, we see that the model does not have many false positives. When it comes to governments allocating enforcement funds, this model is useful for those governments with fewer resources. This is because the model will not waste resources by predicting areas which will not have graffiti as being prone to vandalism. The disadvantage, on the other hand, is that it has many more false negatives, so an area may have graffiti in the future, but the model will not always tell us of it.
+Here, we see that the model does not have many false positives. When it comes to governments allocating enforcement funds, this model is useful for those governments with fewer resources. This is because the model will not waste resources by predicting areas which will not have graffiti as being prone to vandalism. On the other hand, the disadvantage is that it has many more false negatives so that an area may have graffiti in the future, but the model will not always tell us of it.
 
-To predict, The most important features for this model are listed in the following tables. First we show those features which prevent graffiti from being put on a building, and then those that encourage more graffiti.
+To predict, The most important features for this model are listed in the following tables. First, we show those features which prevent graffiti from being put on a building and then those that encourage more graffiti.
 
 |**Feature**|**Coefficient**|
 |one\_house\_away\_buildings\_count|-0.61574|
@@ -106,7 +108,7 @@ To predict, The most important features for this model are listed in the followi
     Fig. 3.8. Features which prevent graffiti from being put on a building
 </p>
 
-From the above, we see that more nearby buildings will prevent graffiti. Furthermore, if nearby buildings have a big number of graffiti on them, then there is less chance that the building in question will have graffiti on it. Lastly, if the nearby buildings are tall on average, this is also seen to prevent vandalism.
+From the above, we see that more nearby buildings will prevent graffiti. Furthermore, if nearby buildings have a large number of graffiti on them, there is less chance that the building in question will have graffiti. Lastly, if the nearby buildings are tall on average, this is also seen to prevent vandalism.
 
 |**Feature**|**Coefficient**|
 |four\_houses\_away\_graffiti\_buildings|0.82626|
@@ -119,9 +121,9 @@ From the above, we see that more nearby buildings will prevent graffiti. Further
     Fig. 3.9. Features which encourage more graffiti.
 </p>
 
-Here, as we also saw for regression, the more buildings with graffiti near a building, the more chance of the building having graffiti. If the median height of a nearby building is tall, then this is shown to contribute to an increase in vandalism. Lastly, if the average number of graffiti on nearby buildings is large, then this will increase the probability of the current building in question to have graffiti.
+As we also saw for regression, the more buildings with graffiti near a building, the more chance building has graffiti. If the median height of a nearby building is tall, this is shown to increase in vandalism. Lastly, if the average number of graffiti on nearby buildings is large, this will increase the probability of the current building in question having graffiti.
 
-In conclusion, similar to regression, the more people occupy nearby buildings, the less vandalism there will be in the area. Another similar correlation we find is that that if nearby buildings have a lot of graffiti, then so will the other buildings in the area. In spite of this, we notice that if the count of the graffiti of the nearby buildings is high, then there is less chance of the current buildings having graffiti. We form the hypothesis that this is because buildings with high graffiti density act as a 'magnet' for new graffiti, protecting other buildings from sharing the same fate.
+In conclusion, similar to a regression, the more people occupy nearby buildings, the less vandalism there will be in the area. Another similar correlation we find is that if nearby buildings have a lot of graffiti, then so will the other buildings in the area. In spite of this, we notice that if the count of the graffiti of the nearby buildings is high, then there is less chance of the current buildings having graffiti. We form the hypothesis that this is because buildings with high graffiti density act as a 'magnet' for new graffiti, protecting other buildings from sharing the same fate.
 
 If we were to use this model for predicting which buildings are going to have graffiti in the future, we end up with this heatmap:
 
@@ -139,7 +141,7 @@ In the case of Logistic Regression with the balanced weights, the confusion matr
     Fig. 3.11. Balanced Logistic Regression confusion matrix.
 </p>
 
-Here, we see that this model prioritizes avoiding false positives, however it has more false negatives. As a result, this model may be more useful for governments with ample resources in their enforcement department who wish to eradicate graffiti at all costs. Using this model, they will end up putting up enforcement in some areas which may not need it. On the flip side, they will not be missing enforcement in areas which really need it, which is the advantage of this model over the previous Logistic Regression model with imbalanced weights.
+Here, we see that this model prioritizes avoiding false positives; however, it has more false negatives. As a result, this model may be more beneficial for governments with ample resources in their enforcement department who wish to eradicate graffiti at all costs. Using this model, they will end up putting up enforcement in some areas which may not need it. On the flip side, they will not be missing enforcement in areas which really need it, which is the advantage of this model over the previous Logistic Regression model with imbalanced weights.
 
 As previously done, we also analyze the most important features for this model.
 
@@ -167,7 +169,7 @@ As previously done, we also analyze the most important features for this model.
 
 Similar to the previous models, the same features contribute to the probability of a building having more or less graffiti. The one interesting new feature is that a high average of nearby sub buildings will decrease the chance of graffiti, while a high median will increase it.
 
-When used to predict new graffiti, this model produced the following result. One can notice how it predicts more graffiti than the previous model, as was stated previously when discussing the confusion matrix. Similar to how the regression model predicted, the southern part of Vancouver is prone to becoming a hub for graffiti, and so is the upper middle Eastern part.
+When used to predict new graffiti, this model produced the following result. As discussed in the confusion matrix, one can notice how it predicts more graffiti than the previous model. Similar to how the regression model predicted, the southern part of Vancouver is prone to becoming a hub for graffiti, and so is the upper-middle Eastern part.
 
 ![Balanced Logistic Regression Prediction Heatmap](/assets/images/balanced_logistic_regression_heatmap.png)
 <p align="center">
