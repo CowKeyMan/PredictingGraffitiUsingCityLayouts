@@ -7,7 +7,7 @@ nav_order: 3
 
 # Results
 
-In this chapter, we discuss the results obtained by our machine learning models. For our purposes, we consider two tasks to solve. The first is a regression problem, where we the task is to predict the actual number of graffiti that will be defacing building. The second problem is classification, where the goal is to predict whether a building will be vandalized with graffiti or not.
+In this chapter, we discuss the results obtained by our machine learning models. For our purposes, we consider two tasks to solve. The first is a regression problem, where the task is to predict the actual number of graffiti that will be defacing building. The second problem is classification, where the goal is to predict whether a building will be vandalized with graffiti or not.
 
 ## Regression
 
