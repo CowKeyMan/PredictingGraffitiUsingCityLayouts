@@ -1,3 +1,9 @@
+# For Users:
+
+Check out the results and visualisations here: https://cowkeyman.github.io/PredictingGraffitiUsingCityLayouts/
+
+# For developers or those who wish to run our code
+
 Steps:
 
 1. Run python data\_cleaning/filter\_buildings.py
